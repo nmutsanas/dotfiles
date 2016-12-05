@@ -18,7 +18,7 @@ local path_cnt=0;
 for file in ${(M)config_files:#*/path.zsh}
 do
 	path_cnt=$((path_cnt + 1))
-echo $file &&	source $file
+	green $file &&	source $file
 done
 
 # load the env files
@@ -26,7 +26,7 @@ local env_cnt=0;
 for file in ${(M)config_files:#*/env.zsh}
 do
 	env_cnt=$((env_cnt + 1))
-	echo $file && source $file
+	green $file && source $file
 done
 
 # load everything but the path, completion and env files
@@ -34,7 +34,7 @@ local other_cnt=0;
 for file in ${${${config_files:#*/path.zsh}:#*/completion.zsh}:#*/env.zsh}
 do
 	other_cnt=$((other_cnt + 1))
-	echo $file && source $file
+	green $file && source $file
 done
 
 # load the completion files
@@ -42,7 +42,7 @@ local compl_cnt=0;
 for file in ${(M)config_files:#*/completion.zsh}
 do
 	compl_cnt=$((compl_cnt + 1));
-echo $file &&	source $file
+	green $file &&	source $file
 done
 # print out a report of what was loaded, for debugging
 green "${path_cnt} path, ${env_cnt} env, ${other_cnt} other, ${compl_cnt} completion"

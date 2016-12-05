@@ -1,0 +1,51 @@
+# -----------------$HOME/.abcde.conf----------------- #
+#
+#   A sample configuration file to convert music cds to
+#      MP3, Ogg Vorbis, FLAC, Musepack & AAC
+#          using abcde version 2.5.3
+#
+#       http://andrews-corner.org/abcde.html
+# -------------------------------------------------- #
+
+# Specify encoder for MP3
+MP3ENCODERSYNTAX=lame
+# Path to MP3 encoder
+LAME=lame
+# Options for MP3
+LAMEOPTS='--preset extreme'
+#Encode to MP3 format
+OUTPUTTYPE="mp3"
+
+CDROMREADERSYNTAX=cdparanoia
+CDPARANOIA=cdparanoia
+CDPARANOIAOPTS="--never-skip=40"
+
+# Give the location of the CD identification program:
+CDDISCID=cd-discid
+
+OUTPUTDIR="$HOME/music/0_incoming/"
+ACTIONS=cddb,playlist,read,encode,tag,move,clean
+OUTPUTFORMAT='${ARTISTFILE}-${ALBUMFILE}/${TRACKNUM}.${TRACKFILE}'
+VAOUTPUTFORMAT='Various-${ALBUMFILE}/${TRACKNUM}.${ARTISTFILE}-${TRACKFILE}'
+
+# Create playlists for single and various-artist encodes. I would suggest
+# commenting these out for single-track encoding.
+PLAYLISTFORMAT='${ARTISTFILE}-${ALBUMFILE}/${ALBUMFILE}.m3u'
+VAPLAYLISTFORMAT='Various-${ALBUMFILE}/${ALBUMFILE}.m3u'
+
+mungefilename (){
+	echo "$@" | sed s,:,-,g | tr / _ | tr -d \'\"\?\[:cntrl:\]
+}
+
+post_read (){
+	notify-send "successfully ripped ${ARTISTFILE}-${ALBUMFILE}"
+}
+# Run a few encoders simultaneously
+MAXPROCS=4
+# Makes tracks 01 02 not 1 2
+PADTRACKS=y
+# Useful for debugging
+EXTRAVERBOSE=y
+# Please eject cd when finished :-)
+EJECTCD=y
+

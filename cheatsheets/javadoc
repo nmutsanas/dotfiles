@@ -1,0 +1,9 @@
+{@value package.class#field}        when {@value} is used (without any argument) in the doc comment of a static field, it displays the value of that constant: The value of this constant is {@value}...
+{@value package.class#field}        ...otherwise it displays the value of the specified constant: Evaluates the script starting with {@value #SCRIPT_START}.
+{@code text}                        Equivalent to <code>{@literal}</code>.
+@see reference                      Adds a "See Also" heading. 
+@see reference                      * Reference is a string: Adds a text entry for string. No link is generated. The string is a book or other reference to information not available by URL.           
+@see reference                      * Reference is an <a href="URL#value">label</a>: Adds a link as defined by URL#value. The URL#value is a relative or absolute URL.
+@see reference                      * Reference is an package.class#member label: Adds a link (with optional visible text label) that points to the documentation for the specified name in the Java Language that is referenced.
+{@link package.class#member label}  in-line link with visible text label that points to the documentation for the specified package, class or member name of a referenced class
+@deprecated deprecated-text         the first sentence should at least tell the user when the API was deprecated and what to use as a replacement. A {@link} tag should be included that points to the replacement method

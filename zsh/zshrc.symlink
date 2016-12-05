@@ -1,41 +1,48 @@
-# shortcut to this dotfiles path is $ZSH
-export ZSH=$HOME/.dotfiles
-
-# your project folder that we can `c [tab]` to
-export PROJECTS=~/Code
-
-# Stash your environment variables in ~/.localrc. This means they'll stay out
-# of your main dotfiles repository (which may be public, like this one), but
-# you'll have access to them in your scripts.
-if [[ -a ~/.localrc ]]
-then
-  source ~/.localrc
-fi
-
-# all of our zsh files
-typeset -U config_files
-config_files=($ZSH/**/*.zsh)
-
-# load the path files
-for file in ${(M)config_files:#*/path.zsh}
-do
-  source $file
-done
-
-# load everything but the path and completion files
-for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}
-do
-  source $file
-done
-
+#!/bin/zsh
+ZSH_HOME=~/dot/zsh
+PROJECTS=~/code
+CHEATSHEETS=~/dot/cheatsheets/
 # initialize autocomplete here, otherwise functions won't be loaded
 autoload -U compinit
 compinit
 
-# load every completion after autocomplete loads
-for file in ${(M)config_files:#*/completion.zsh}
+source ${ZSH_HOME}/antigen.bootstrap
+#load the topics
+
+# all of our zsh files
+typeset -U config_files
+config_files=($ZSH_HOME/**/*.zsh)
+
+# load the path files
+local path_cnt=0;
+for file in ${(M)config_files:#*/path.zsh}
 do
-  source $file
+	path_cnt=$((path_cnt + 1))
+echo $file &&	source $file
 done
 
-unset config_files
+# load the env files
+local env_cnt=0;
+for file in ${(M)config_files:#*/env.zsh}
+do
+	env_cnt=$((env_cnt + 1))
+	echo $file && source $file
+done
+
+# load everything but the path, completion and env files
+local other_cnt=0;
+for file in ${${${config_files:#*/path.zsh}:#*/completion.zsh}:#*/env.zsh}
+do
+	other_cnt=$((other_cnt + 1))
+	echo $file && source $file
+done
+
+# load the completion files
+local compl_cnt=0;
+for file in ${(M)config_files:#*/completion.zsh}
+do
+	compl_cnt=$((compl_cnt + 1));
+echo $file &&	source $file
+done
+# print out a report of what was loaded, for debugging
+green "${path_cnt} path, ${env_cnt} env, ${other_cnt} other, ${compl_cnt} completion"

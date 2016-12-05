@@ -1,0 +1,354 @@
+Keybindings in `browser'
+      <down> move down=1
+       <c-c> abort
+      <left> move left=1
+     <right> move right=1
+      <home> move to=0
+       <c-h> toggle_option show_hidden
+        <f1> help
+       <c-j> move right=1
+        <f3> display_file
+       <c-l> redraw_window
+        <f5> copy
+        <f6> cut
+        <f7> console mkdir%space
+        <f8> console delete
+         +aX shell -f chmod a+X %s
+         +ar shell -f chmod a+r %s
+         +as shell -f chmod a+s %s
+         +at shell -f chmod a+t %s
+         +aw shell -f chmod a+w %s
+         +ax shell -f chmod a+x %s
+          +r shell -f chmod u+r %s
+          +s shell -f chmod u+s %s
+          +t shell -f chmod u+t %s
+         +uX shell -f chmod u+X %s
+         +ur shell -f chmod u+r %s
+         +us shell -f chmod u+s %s
+         +ut shell -f chmod u+t %s
+         +uw shell -f chmod u+w %s
+         +ux shell -f chmod u+x %s
+         +gX shell -f chmod g+X %s
+         +gr shell -f chmod g+r %s
+         +gs shell -f chmod g+s %s
+         +gt shell -f chmod g+t %s
+         +gw shell -f chmod g+w %s
+         +gx shell -f chmod g+x %s
+          +x shell -f chmod u+x %s
+          +X shell -f chmod u+X %s
+          +w shell -f chmod u+w %s
+         +oX shell -f chmod o+X %s
+         +or shell -f chmod o+r %s
+         +os shell -f chmod o+s %s
+         +ot shell -f chmod o+t %s
+         +ow shell -f chmod o+w %s
+         +ox shell -f chmod o+x %s
+       <f10> exit
+        <up> move up=1
+       <c-u> move up=0.5    pages=True
+       <c-w> tab_close
+       <c-d> move down=0.5  pages=True
+    <escape> change_mode normal
+     <space> mark_files toggle=True
+           ! console shell%space
+      "<any> tag_toggle tag=%any
+           # console shell -p%space
+       <c-f> move down=1   pages=True
+      '<any> enter_bookmark %any
+       '<bg> draw_bookmarks
+      <alt>1 tab_open 1
+      <alt>2 tab_open 2
+      <alt>3 tab_open 3
+ <alt><left> tab_move -1
+<alt><right> tab_move 1
+      <alt>6 tab_open 6
+      <alt>7 tab_open 7
+      <alt>8 tab_open 8
+      <alt>4 tab_open 4
+      <alt>9 tab_open 9
+      <alt>5 tab_open 5
+         -aX shell -f chmod a-X %s
+         -ar shell -f chmod a-r %s
+         -as shell -f chmod a-s %s
+         -at shell -f chmod a-t %s
+         -aw shell -f chmod a-w %s
+         -ax shell -f chmod a-x %s
+          -r shell -f chmod u-r %s
+          -s shell -f chmod u-s %s
+          -t shell -f chmod u-t %s
+         -uX shell -f chmod u-X %s
+         -ur shell -f chmod u-r %s
+         -us shell -f chmod u-s %s
+         -ut shell -f chmod u-t %s
+         -uw shell -f chmod u-w %s
+         -ux shell -f chmod u-x %s
+         -gX shell -f chmod g-X %s
+         -gr shell -f chmod g-r %s
+         -gs shell -f chmod g-s %s
+         -gt shell -f chmod g-t %s
+         -gw shell -f chmod g-w %s
+         -gx shell -f chmod g-x %s
+          -x shell -f chmod u-x %s
+          -X shell -f chmod u-X %s
+          -w shell -f chmod u-w %s
+         -oX shell -f chmod o-X %s
+         -or shell -f chmod o-r %s
+         -os shell -f chmod o-s %s
+         -ot shell -f chmod o-t %s
+         -ow shell -f chmod o-w %s
+         -ox shell -f chmod o-x %s
+           / console search%space
+       <tab> tab_move 1
+           : console
+           ; console
+           = chmod
+           ? help
+           @ console -p6 shell  %%s
+           A eval fm.open_console('rename ' + fm.thisfile.relative_path)
+       <c-b> move up=1     pages=True
+           E edit
+           G move to=-1
+           H history_go -1
+           I eval fm.open_console('rename ' + fm.thisfile.relative_path, position=7)
+           J move down=0.5  pages=True
+           K move up=0.5    pages=True
+           L history_go 1
+          Mp linemode permissions
+          Mi linemode fileinfo
+          Mt linemode metatitle
+          Mf linemode filename
+           N search_next forward=False
+           Q quit!
+  <pagedown> move down=1   pages=True
+    <pageup> move up=1     pages=True
+       <c-n> tab_new ~
+           V toggle_visual_mode
+           W display_log
+          ZQ quit
+          ZZ quit
+           [ move_parent -1
+           ] move_parent 1
+      `<any> enter_bookmark %any
+       `<bg> draw_bookmarks
+     <s-tab> tab_move -1
+          cc search_next order=ctime
+          ca search_next order=atime
+          cs search_next order=size
+          ct search_next order=tag
+          ci search_next order=mimetype
+          cd console cd%space
+          cw console rename%space
+          cm search_next order=mtime
+          dc get_cumulative_size
+          da cut mode=add
+          dr cut mode=remove
+          dk eval fm.cut(dirarg=dict(up=1), narg=quantifier)
+          dd cut
+          du shell -p du --max-depth=1 -h --apparent-size
+         dgg eval fm.cut(dirarg=dict(to=0), narg=quantifier)
+          dD console delete
+          dj eval fm.cut(dirarg=dict(down=1), narg=quantifier)
+          dG eval fm.cut(dirarg=dict(to=-1), narg=quantifier)
+          dU shell -p du --max-depth=1 -h --apparent-size | sort -rh
+           f console find%space
+           a rename_append
+           h move left=1
+           i display_file
+           j move down=1
+          gn tab_new ~
+          gc tab_close
+          gd cd /dev
+          ge cd /etc
+          gg move to=0
+          gh cd ~
+          gl cd -r .
+          gR eval fm.cd(ranger.RANGERDIR)
+          gL cd -r %f
+          gm cd /media
+          gM cd /mnt
+          go cd /opt
+          gr cd /
+          gs cd /srv
+          gt tab_move 1
+          gu cd /usr
+          gv cd /var
+          gT tab_move -1
+          g/ cd /
+          g? cd /usr/share/doc/ranger
+           l move right=1
+       <c-r> reset
+           n search_next
+          oa chain set sort=atime;     set sort_reverse=False
+          ob chain set sort=basename;  set sort_reverse=False
+          oc chain set sort=ctime;     set sort_reverse=False
+          oB chain set sort=basename;  set sort_reverse=True
+          oe chain set sort=extension; set sort_reverse=False
+          oA chain set sort=atime;     set sort_reverse=True
+          oS chain set sort=size;      set sort_reverse=True
+          om chain set sort=mtime;     set sort_reverse=False
+          on chain set sort=natural;   set sort_reverse=False
+          oM chain set sort=mtime;     set sort_reverse=True
+          or toggle_option sort_reverse
+          os chain set sort=size;      set sort_reverse=False
+          ot chain set sort=type;      set sort_reverse=False
+          oN chain set sort=natural;   set sort_reverse=True
+          oC chain set sort=ctime;     set sort_reverse=True
+          oT chain set sort=type;      set sort_reverse=True
+          oz set sort=random
+          oE chain set sort=extension; set sort_reverse=True
+          pp paste
+          pP paste append=True
+         pht paste_hardlinked_subtree
+         phl paste_hardlink
+          pL paste_symlink relative=True
+          po paste overwrite=True
+          pl paste_symlink relative=False
+          pO paste overwrite=True append=True
+       <end> move to=-1
+           r chain draw_possible_programs; console open_with%space
+           s console shell%space
+           t tag_toggle
+          uq tab_restore
+          ud uncut
+          uv mark_files all=True val=False
+          uV toggle_visual_mode reverse=True
+          uy uncut
+          ut tag_remove
+     um<any> unset_bookmark %any
+      um<bg> draw_bookmarks
+        <f4> edit
+           w taskview_open
+          yp shell -f echo -n %%d/%%f | xsel -i; xsel -o | xsel -i -b
+          ya copy mode=add
+          yr copy mode=remove
+          yk eval fm.copy(dirarg=dict(up=1), narg=quantifier)
+          yd shell -f echo -n %%d     | xsel -i; xsel -o | xsel -i -b
+         ygg eval fm.copy(dirarg=dict(to=0), narg=quantifier)
+          yy copy
+          yj eval fm.copy(dirarg=dict(down=1), narg=quantifier)
+          yG eval fm.copy(dirarg=dict(to=-1), narg=quantifier)
+          yn shell -f echo -n %%f     | xsel -i; xsel -o | xsel -i -b
+          zp toggle_option preview_files
+          zP toggle_option preview_directories
+          zv toggle_option use_preview_script
+          zc toggle_option collapse_preview
+          zd toggle_option sort_directories_first
+          zu toggle_option autoupdate_cumulative_size
+          zs toggle_option sort_case_insensitive
+          zh toggle_option show_hidden
+          zi toggle_option flushinput
+          zf console filter%space
+          zm toggle_option mouse_enabled
+           } traverse
+           k move up=1
+      m<any> set_bookmark %any
+       m<bg> draw_bookmarks
+           q quit
+    <insert> console touch%space
+           v mark_files all=True toggle=True
+           R reload_cwd
+           S shell $SHELL
+
+Keybindings in `console'
+       <c-a> eval fm.ui.console.move(right=0, absolute=True)
+      <down> eval fm.ui.console.history_move(1)
+       <c-c> eval fm.ui.console.close()
+      <left> eval fm.ui.console.move(left=1)
+     <right> eval fm.ui.console.move(right=1)
+      <home> eval fm.ui.console.move(right=0, absolute=True)
+ <backspace> eval fm.ui.console.delete(-1)
+       <c-h> eval fm.ui.console.delete(-1)
+       <tab> eval fm.ui.console.tab()
+       <c-j> eval fm.ui.console.execute()
+       <c-k> eval fm.ui.console.delete_rest(1)
+       <c-l> redraw_window
+       <c-b> eval fm.ui.console.move(left=1)
+       <c-n> eval fm.ui.console.history_move(1)
+       <c-p> eval fm.ui.console.history_move(-1)
+        <up> eval fm.ui.console.history_move(-1)
+       <c-u> eval fm.ui.console.delete_rest(-1)
+       <c-w> eval fm.ui.console.delete_word()
+       <c-y> eval fm.ui.console.paste()
+    <escape> eval fm.ui.console.close()
+       <c-e> eval fm.ui.console.move(right=-1, absolute=True)
+     <s-tab> eval fm.ui.console.tab(-1)
+       <c-f> eval fm.ui.console.move(right=1)
+       <end> eval fm.ui.console.move(right=-1, absolute=True)
+      <alt>d eval fm.ui.console.delete_word(backward=False)
+<allow_quantifiers> false
+    <delete> eval fm.ui.console.delete(0)
+       <c-d> eval fm.ui.console.delete(0)
+<backspace2> eval fm.ui.console.delete(-1)
+
+Keybindings in `pager'
+      <down> pager_move  down=1
+        <up> pager_move  up=1
+      <left> pager_move  left=4
+     <right> pager_move  right=4
+      <home> pager_move  to=0
+           G pager_move  to=-1
+       <c-j> pager_move  down=1
+        <f3> pager_close
+       <c-l> redraw_window
+       <c-b> pager_move  up=1.0    pages=True
+       <c-n> pager_move  down=1
+       <c-p> pager_move  up=1
+           Q pager_close
+  <pagedown> pager_move  down=1.0  pages=True
+    <pageup> pager_move  up=1.0    pages=True
+       <c-u> pager_move  up=0.5    pages=True
+       <c-d> pager_move  down=0.5  pages=True
+    <escape> pager_close
+           E edit_file
+     <space> pager_move  down=1.0  pages=True
+           b pager_move  up=1.0    pages=True
+           d pager_move  down=0.5  pages=True
+       <c-f> pager_move  down=1.0  pages=True
+           f pager_move  down=1.0  pages=True
+           g pager_move  to=0
+       <end> pager_move  to=-1
+           i pager_close
+           j pager_move  down=1
+           k pager_move  up=1
+           l pager_move  right=4
+           n pager_move  down=1.0  pages=True
+           p pager_move  up=1.0    pages=True
+           h pager_move  left=4
+           q pager_close
+           u pager_move  up=0.5    pages=True
+
+Keybindings in `taskview'
+      <down> taskview_move down=1
+        <up> taskview_move up=1
+       <c-d> taskview_move down=0.5  pages=True
+      <home> taskview_move to=0
+           G taskview_move to=-1
+       <c-j> taskview_move down=1
+           K eval -q fm.ui.taskview.task_move(0)
+       <c-l> redraw_window
+       <c-b> taskview_move up=1.0    pages=True
+       <c-n> taskview_move down=1
+       <c-p> taskview_move up=1
+           Q taskview_close
+  <pagedown> eval -q fm.ui.taskview.task_move(-1)
+    <pageup> eval -q fm.ui.taskview.task_move(0)
+       <c-u> taskview_move up=0.5    pages=True
+    <escape> taskview_close
+     <space> taskview_move down=1.0  pages=True
+       <c-c> taskview_close
+           b taskview_move up=1.0    pages=True
+          dd eval -q fm.ui.taskview.task_remove()
+       <c-f> taskview_move down=1.0  pages=True
+           f taskview_move down=1.0  pages=True
+           g taskview_move to=0
+       <end> taskview_move to=-1
+           j taskview_move down=1
+           k taskview_move up=1
+           n taskview_move down=1.0  pages=True
+           p taskview_move up=1.0    pages=True
+           q taskview_close
+           u taskview_move up=0.5    pages=True
+           w taskview_close
+    <delete> eval -q fm.ui.taskview.task_remove()
+           J eval -q fm.ui.taskview.task_move(-1)
+

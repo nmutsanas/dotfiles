@@ -1,0 +1,43 @@
+# copied from http://reasoniamhere.com/2014/01/11/outrageously-useful-tips-to-master-your-z-shell/
+# (needs cleanup)
+ls zsh_demo    # list every file directly below the zsh_demo folder
+ls zsh_demo/*   # list every file in the folders directly below the zsh_demo folder
+ls zsh_demo/*/*   # list every file in every folder two levels below the zsh_demo folder
+ls zsh_demo/**/*   # list every file anywhere below the zsh_demo folder
+ls zsh_demo/**/*.txt   # list every file that ends in .txt in every folder at any level below the zsh_demo folder
+ls -l zsh_demo/**/*<1-10>.txt   # list text files that end in a number from 1 to 10
+ls -l zsh_demo/**/[a]*.txt   # list text files that start with the letter a
+ls -l zsh_demo/**/(ab|bc)*.txt   # list text files that start with either ab or bc
+ls -l zsh_demo/**/[^cC]*.txt   # list text files that don't start with a lower or uppercase c
+print -l zsh_demo/**/*(/)   # show only directories
+print -l zsh_demo/**/*(.)   # show only regular files
+ls -l zsh_demo/**/*(L0)   # show empty files
+ls -l zsh_demo/**/*(Lk+3)   # show files greater than 3 KB
+print -l zsh_demo/**/*(mh-1)   # show files modified in the last hour
+ls -l zsh_demo/**/*(om[1,3])   # sort files from most to least recently modified and show the last 3
+ls -l zsh_demo/**/*(.Lm-2mh-1om[1,3])
+print -l zsh_demo/*/*(e:'[[ ! -e $REPLY/malta ]]':)   # show every continent that doesn't contain a country named malta
+print -l zsh_demo/data/europe/poland/*.txt   # A plain old glob
+print -l zsh_demo/data/europe/poland/*.txt(:t)   # Return the file name (t stands for tail)
+print -l zsh_demo/data/europe/poland/*.txt(:t:r)   # Return the file name without the extension (r stands for remove_extension, I think)
+print -l zsh_demo/data/europe/poland/*.txt(:e)   # Return the extension
+print -l zsh_demo/data/europe/poland/*.txt(:h)   # Return the parent folder of the file (h stands for head)
+print -l zsh_demo/data/europe/poland/*.txt(:h:h)   # Return the parent folder of the parent
+print -l zsh_demo/data/europe/poland/*.txt([1]:h)   # Return the parent folder of the first file. Remember you can combine qualifiers and modifiers.
+my_file=(zsh_demo/data/europe/poland/*.txt([1])) # If you want to store a glob in a variable, you must use parentheses
+
+print -l $my_file
+print -l $my_file(:h)    # this is the syntax we saw before
+print -l ${my_file:h}    # I find this syntax more convenient
+print -l ${my_file(:h)}  # don't mix the two, or you'll get an error
+print -l ${my_file:u}    # the :u modifier makes the text uppercase
+
+my_variable="path/abcd"
+echo ${my_variable:s/bc/BC/} # path/aBCd
+echo ${my_variable:s_bc_BC_} # path/aBCd
+echo ${my_variable:s/\//./} # path.abcd (escaping the slash \/)
+echo ${my_variable:s_/_._}  # path.abcd (slightly more readable)
+
+my_variable="aaa"
+echo ${my_variable:s/a/A/} # Aaa
+echo ${my_variable:gs/a/A/} # AAA

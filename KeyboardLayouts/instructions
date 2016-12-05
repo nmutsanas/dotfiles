@@ -1,0 +1,24 @@
+sudo ln -s ./nik /usr/share/X11/xkb/symbols/nik
+sudo ln -s ./nik /usr/share/X11/xkb/symbols/nik
+
+sudo $EDITOR /usr/share/X11/rules/evdev.xml
+
+# Insert the following
+<layout>
+  <configItem>
+    <name>nik</name>
+    <shortDescription>Nik</shortDescription>
+    <description>Nikos International Keyboard</description>
+    <languageList><iso639Id>eng</iso639Id></languageList>
+ </configItem>
+ <variantList/>
+</layout>
+<layout>
+  <configItem>
+    <name>ngr</name>
+    <shortDescription>Ell</shortDescription>
+    <description>Nikos Greek Keyboard</description>
+    <languageList><iso639Id>gre</iso639Id></languageList>
+ </configItem>
+ <variantList/>
+</layout>

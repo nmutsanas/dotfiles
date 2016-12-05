@@ -1,0 +1,43 @@
+#!/bin/zsh
+source ~/dotfiles/antigen/antigen.zsh
+
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
+
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundles << EOBUNDLES
+  git
+  extract
+  dircycle
+  docker
+  jsontools
+  mvn
+  wd
+  urltools
+EOBUNDLES
+
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# autoenv to source .env and .out files
+antigen bundle horosgrisa/autoenv
+
+# calculator
+antigen bundle arzzen/calc.plugin.zsh
+
+# solarized man
+antigen bundle zlsun/solarized-man
+
+# easy colors
+antigen bundle Tarrasch/zsh-colors
+
+# open files directly
+antigen bundle srijanshetty/zsh-suffix-alias
+
+# higher order functions like map, filter
+antigen bundle Tarrasch/zsh-functional
+
+# Load the theme.
+antigen theme robbyrussell
+
+antigen apply

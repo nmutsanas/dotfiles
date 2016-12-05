@@ -1,0 +1,1 @@
+hostnamectl set-hostname myhostname       # sets the hostname. Also edit it in /etc/hosts to 127.0.0.1	localhost.localdomain	localhost	 myhostname and ::1		localhost.localdomain	localhost	 myhostname

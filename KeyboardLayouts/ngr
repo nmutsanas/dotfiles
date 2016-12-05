@@ -1,0 +1,53 @@
+// $XKeyboardConfig: xkbdesc/symbols/gr,v 1.8 2006/09/04 20:25:10 svu Exp $
+
+// $XFree86: xc/programs/xkbcomp/symbols/el,v 1.2 2002/11/15 02:26:41 dawes Exp $
+//
+// Hellenic keyboard map for XFree86
+// Original version:
+// Kostas Gewrgiou <gewrgiou@imbc.gr>
+// Heavily modified and maintained by:
+// Vasilis Vasaitis <vvas@hal.csd.auth.gr>
+// Originally converted to single group form by:
+// Ivan Pascal <pascal@info.tsu.ru>
+
+default partial alphanumeric_keys alternate_group
+xkb_symbols "basic" {
+
+    include "latin"
+
+    name[Group1]="Nikos Personalized Greek Keyboard";
+
+    key <AD01> { [	semicolon,		colon, q, Q		] };
+    key <AD02> { [	Greek_finalsmallsigma,	Greek_SIGMA, w, W	] };
+    key <AD03> { [	Greek_epsilon,		Greek_EPSILON, e, E	] };
+    key <AD04> { [	Greek_rho,		Greek_RHO, r, R	] };
+    key <AD05> { [	Greek_tau,		Greek_TAU, t, T	] };
+    key <AD06> { [	Greek_upsilon,		Greek_UPSILON, y, Y	] };
+    key <AD07> { [	Greek_theta,		Greek_THETA, u, U	] };
+    key <AD08> { [	Greek_iota,		Greek_IOTA, i, I	] };
+    key <AD09> { [	Greek_omicron,		Greek_OMICRON, o, O	] };
+    key <AD10> { [	Greek_pi,		Greek_PI, p, P	] };
+
+    key <AC01> { [	Greek_alpha,		Greek_ALPHA, a, A	] };
+    key <AC02> { [	Greek_sigma,		Greek_SIGMA, s, S	] };
+    key <AC03> { [	Greek_delta,		Greek_DELTA, d, D	] };
+    key <AC04> { [	Greek_phi,		Greek_PHI, f, F	] };
+    key <AC05> { [	Greek_gamma,		Greek_GAMMA, g, G	] };
+    key <AC06> { [	Greek_eta,		Greek_ETA, h, H	] };
+    key <AC07> { [	Greek_xi,		Greek_XI, j, J	] };
+    key <AC08> { [	Greek_kappa,		Greek_KAPPA, k, K	] };
+    key <AC09> { [	Greek_lamda,		Greek_LAMDA, l, L	] };
+    key <AC10> { [	dead_acute,		dead_diaeresis	] };
+
+    key <AB01> { [	Greek_zeta,		Greek_ZETA, z, Z	] };
+    key <AB02> { [	Greek_chi,		Greek_CHI, x, X	] };
+    key <AB03> { [	Greek_psi,		Greek_PSI, c, C	] };
+    key <AB04> { [	Greek_omega,		Greek_OMEGA, v, V	] };
+    key <AB05> { [	Greek_beta,		Greek_BETA, b, B	] };
+    key <AB06> { [	Greek_nu,		Greek_NU, n, N	] };
+    key <AB07> { [	Greek_mu,		Greek_MU, m, M	] };
+
+    key <LSGT> { [	guillemotleft,		guillemotright	] };
+
+    include "level3(ralt_switch)"
+};

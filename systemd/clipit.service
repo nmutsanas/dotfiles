@@ -1,0 +1,8 @@
+[Unit]
+Description=Clipit Clipboard manager
+
+[Service]
+ExecStart=/usr/bin/clipit --mode 0660
+
+[Install]
+WantedBy=multi-user.target

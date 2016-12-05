@@ -1,5 +1,11 @@
-# matches case insensitive for lowercase
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+#!/bin/zsh
+_activate_dt5_db(){
+	_alternative "dbs:available databases:($(list-mysql-dbs))"
+}
+compdef _activate_dt5_db activate_dt5_db
 
-# pasting with tabs doesn't perform completion
-zstyle ':completion:*' insert-tab pending
+_c() { _files -W ~/code/dt5 -/; }
+compdef _c c
+
+_h() { _files -W ~/ -/; }
+compdef _h h

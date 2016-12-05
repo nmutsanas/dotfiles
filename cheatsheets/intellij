@@ -1,0 +1,26 @@
+Ctrl+Shift+A                 Find action by name
+Alt+Enter                    Show the list of available intention actions.
+Alt+F1                       Switch between views ( Project, Structure, etc.).
+Ctrl+Tab                     Switch between the tool windows and files opened in the editor.
+Alt+Home                     Show the Navigation bar.
+Ctrl+J                       Insert a live template.
+Ctrl+Alt+J                   Surround with a live template.
+F4                           Edit an item from the Project or another tree view.
+Ctrl+Slash                   Comment a line or fragment of code with the line or block comment.
+Ctrl+Shift+Slash             Uncomment a line or fragment of code with the line or block comment.
+Ctrl+N                       Find class by name.
+Ctrl+Shift+N                 Find file by name
+Ctrl+D                       Duplicate the current line or selection.
+Ctrl+W and Ctrl+Shift+W      Incremental expression selection.
+Ctrl+F                       Find text string in the current file.
+Ctrl+Shift+F                 Find text in the project or in the specified directory.
+Double-press Shift           Search everywhere.
+Ctrl+Shift+F7                Quick view the usages of the selected symbol.
+Ctrl+NumPad Plus             Expand a code block in the editor.
+Ctrl+NumPad -                Collapse a code block in the editor.
+Ctrl+Space                   Invoke code completion.
+Ctrl+Shift+Enter             Smart statement completion.
+Ctrl+Shift+Space             Smart completion
+Ctrl+Shift+Alt+Down          Navigate to next change
+Ctrl+Shift+Alt+Up            Navigate to previous change
+Ctrl+Shift+Backspace         Navigate to place of last edit

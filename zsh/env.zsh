@@ -2,8 +2,9 @@
 source $HOME/scripts/utils/checkhost.sh
 # general path
 PATH=$PATH:$HOME/scripts/
-PATH=$PATH:$HOME/scripts/dc/
 PATH=$PATH:$HOME/scripts/system/
+PATH=$PATH:$HOME/scripts/i3/
+PATH=$PATH:$HOME/scripts/i3/blocks/
 # work path
 function loadWorkEnv(){
 	# java

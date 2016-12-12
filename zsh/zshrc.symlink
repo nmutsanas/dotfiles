@@ -7,40 +7,46 @@ autoload -U compinit
 compinit
 
 source ${ZSH_HOME}/antigen.bootstrap
+
+# Stash your environment variables in ~/.localrc. This means they'll stay out
+# of your main dotfiles repository (which may be public, like this one), but
+# you'll have access to them in your scripts.
+if [[ -a ~/.localrc ]]
+then
+  source ~/.localrc
+fi
+
 #load the topics
 
 # all of our zsh files
-typeset -U config_files
-config_files=($ZSH_HOME/**/*.zsh)
-
+typeset -U config_files # -U to ignore duplicates
+config_files=($HOME/dot/**/*.zsh)
+yellow "${#config_files} config files found"
 # load the path files
 local path_cnt=0;
-for file in ${(M)config_files:#*/path.zsh}
-do
+for file in ${(@M)config_files:#*/path.zsh} ; do
 	path_cnt=$((path_cnt + 1))
 	green $file &&	source $file
 done
-
+config_files=(${config_files:#*/path.zsh}) # remove them
 # load the env files
 local env_cnt=0;
-for file in ${(M)config_files:#*/env.zsh}
-do
+for file in ${(M)config_files:#*/env.zsh}; do
 	env_cnt=$((env_cnt + 1))
 	green $file && source $file
 done
+config_files=(${config_files:#*/env.zsh}) # remove them
 
-# load everything but the path, completion and env files
+# load everything else (except completion)
 local other_cnt=0;
-for file in ${${${config_files:#*/path.zsh}:#*/completion.zsh}:#*/env.zsh}
-do
+for file in ${config_files:#*/completion.zsh}; do
 	other_cnt=$((other_cnt + 1))
 	green $file && source $file
 done
-
+config_files=(${(M)config_files:#*/completion.zsh})
 # load the completion files
 local compl_cnt=0;
-for file in ${(M)config_files:#*/completion.zsh}
-do
+for file in ${(M)config_files:#*/completion.zsh}; do
 	compl_cnt=$((compl_cnt + 1));
 	green $file &&	source $file
 done

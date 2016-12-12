@@ -53,7 +53,7 @@ link_file () {
 	local src=$1 dst=$2
 
 	local overwrite=
-	local backup= 
+	local backup=
 	local skip=
 	local action=
 
@@ -61,16 +61,11 @@ link_file () {
 	then
 		if [[ "$overwrite_all" == "false"  &&  "$backup_all" == "false"  &&  "$skip_all" == "false" ]]
 		then
-
 			local currentSrc="$(readlink $dst)"
-
 			if [[ "$currentSrc" == "$src" ]]
 			then
-
 				skip=true;
-
 			else
-
 				user "File already exists: $dst ($(basename "$src")), what do you want to do?\n\
 					[s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
 				vared -p 'What would you like to do?: ' -c action
@@ -90,9 +85,7 @@ link_file () {
 					* )
 						;;
 				esac
-
 			fi
-
 		fi
 
 		overwrite=${overwrite:-$overwrite_all}
@@ -132,12 +125,19 @@ install_dotfiles () {
 		local worker=echo
 	fi
 	local overwrite_all=false
-	local backup_all=false 
+	local backup_all=false
 	local skip_all=false
 
 	for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -not -path '*.git*')
 	do
-		dst="$HOME/.$(basename "${src%.*}")"
+		if [[ $src =~ ".*\.configdir\.symlink" ]]; then
+			readonly config_dir="${src:t:r:r}"
+			info "configdir      : $config_dir"
+			dst="$HOME/.config/${config_dir}"
+		else
+			info "symlink        : $src"
+			dst="$HOME/.$(basename "${src%.*}")"
+		fi
 		$worker link_file "$src" "$dst"
 	done
 }

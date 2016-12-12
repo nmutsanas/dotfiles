@@ -44,3 +44,4 @@ exp1 -ge exp2     true if exp1 is numerically greater than or equal to exp2.
 exp1 && exp2     true if exp1 and exp2 are both true.
 exp1 || exp2     true if either exp1 or exp2 is true.
 -z ${myvar// }   true if myvar is empty or only contains spaces
+typeset -a foo; foo=(~/*.(txt|pdf)) foo=("${(@)foo:#*.txt}") # remove elements from array matching a pattern

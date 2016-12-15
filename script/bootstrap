@@ -131,7 +131,7 @@ install_dotfiles () {
 	for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -not -path '*.git*')
 	do
 		if [[ $src =~ ".*\.configdir\.symlink" ]]; then
-			readonly config_dir="${src:t:r:r}"
+			local config_dir="${src:t:r:r}"
 			info "configdir      : $config_dir"
 			dst="$HOME/.config/${config_dir}"
 		else

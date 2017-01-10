@@ -17,6 +17,7 @@ alias -g .....='../../../..'
 
 alias mp3dl="cd $HOME/music && youtube-dl --extract-audio -f bestaudio --audio-format mp3 --no-playlist"
 
+alias vidduration="ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1"
 alias webshare="python -m http.server 8888"
 
 # date formats quick reference

@@ -1,3 +1,8 @@
+[user]
+	email = nigaki@gmail.com
+	name = Nikos Mutsanas
+[core]
+	autocrlf = input
 # Local/private config goes in the include
 [include]
         path = ~/.gitconfig.local
@@ -23,6 +28,10 @@
         keepBackup = false
 [difftool]
         prompt = false
+[diff]
+    tool = intellij
+[difftool "intellij"]
+    cmd = idea.sh diff $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE")
 [help]
         autocorrect = 1
 [push]

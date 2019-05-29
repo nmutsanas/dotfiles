@@ -4,7 +4,7 @@ _activate_dt5_db(){
 }
 compdef _activate_dt5_db activate_dt5_db
 
-_c() { _files -W ~/code/dt5 -/; }
+_c() { _files -W ~/code/ -/; }
 compdef _c c
 
 _h() { _files -W ~/ -/; }

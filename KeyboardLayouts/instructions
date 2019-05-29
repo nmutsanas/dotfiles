@@ -1,5 +1,5 @@
-sudo ln -s ./nik /usr/share/X11/xkb/symbols/nik
-sudo ln -s ./nik /usr/share/X11/xkb/symbols/nik
+sudo ln -s nik /usr/share/X11/xkb/symbols/nik
+sudo ln -s ngr /usr/share/X11/xkb/symbols/ngr
 
 sudo $EDITOR /usr/share/X11/rules/evdev.xml
 

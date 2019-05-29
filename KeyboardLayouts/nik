@@ -35,8 +35,8 @@ xkb_symbols "basic" {
   key <AD08> { [	   i,          I,        iacute,           Iacute ] };
   key <AD09> { [	   o,          O,    odiaeresis,       Odiaeresis ] };
   key <AD10> { [	   p,          P                                 ] };
-  key <AD11> {	[ braceleft, bracketleft,	dead_grave	]	};
-  key <AD12> {	[ braceright,	bracketright, dead_acute	]	};
+  key <AD11> {	[ bracketleft,	braceleft, dead_grave	]	};
+  key <AD12> {	[ bracketright, braceright,	dead_acute	]	};
 
   key <AC01> { [	   a,          A,    adiaeresis,       Adiaeresis ] };
   key <AC02> { [	   s,          S,        ssharp,          section ] };
@@ -47,8 +47,6 @@ xkb_symbols "basic" {
   key <AB10> { [      slash, question,	     dead_hook,	    dead_hook	    ] };
   key <BKSL> { [ backslash,        bar,      brokenbar,     notsign ] };
 
-  key <AD11> {	[ braceleft, bracketleft,	dead_grave	]	};
-  key <AD12> {	[ braceright,	bracketright, dead_acute	]	};
   key <AC07> { [	   j,	       J,      asterisk                   ] };
   key <AC08> { [           k,          K                                 ] };
   key <AC09> { [           l,          L,       lstroke,          Lstroke ] };

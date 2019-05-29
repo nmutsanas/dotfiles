@@ -6,8 +6,11 @@ atom.symlink/compile-cache/
 atom.symlink/packages
 atom.symlink/storage
 atom.symlink/themes
-atom.symlink/blob-store
 atom.symlink/recovery
 
 git/gitconfig.local.symlink
 ranger/ranger.configdir.symlink/bookmarks
+ranger/ranger.configdir.symlink/history
+cheatsheets/.active
+
+.idea

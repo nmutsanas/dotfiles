@@ -44,13 +44,14 @@
     foreground = "#000000"
     timeout = 0
 
-[evolution]
-   appname = evolution
-   urgency = critical
-   summary = "*volution*"
-   background = "#8DA857"
-
 [intellij tests passed]
 	summary = "Tests passed*"
-	background = "#4A8C53"
+	background = "#0A8C03"
 	foreground = "#3C3F41"
+
+[shell script wide]
+	appname = shellwide
+	geometry = "400x5-20+20"
+	alignment = left
+
+; vim:ft=cfg

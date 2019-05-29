@@ -1,30 +1,6 @@
 #!/bin/zsh
-
-separator-newline(){
-	OIFS="$IFS" && IFS=$'\n' 
-}
-
-separator-restore(){
-	IFS="$OIFS"
-}
-
-del_empty_dirs_with_confirmation(){
-	local empty_dirs=$(find . -type d -empty | sed '/^$/d')
-	local nr_empty_dirs=$(echo -n "$empty_dirs" | wc -l)
-	if [[ $nr_empty_dirs -gt 0 ]]; then
-		echo "Empty dirs ($nr_empty_dirs) :"
-		echo "$empty_dirs"
-		read -q "REPLY?Would you like to delete $nr_empty_dirs empty directories? " -n 1 -r
-		echo    # (optional) move to a new line
-		if [[ $REPLY =~ ^[Yy]$ ]]
-		then
-			find . -type d -empty -delete
-			# do dangerous stuff
-		fi
-	else
-		echo "No empty dirs found"
-	fi
-
+bak(){
+	cp "$1" "$1.bak"
 }
 
 getmyip(){
@@ -44,8 +20,14 @@ mkcd(){
 	mkdir "$1" && cd "$1"
 }
 
-calc(){
-	awk "BEGIN{ print $* }" ;
+# simple calculator
+#calc(){
+#	awk "BEGIN{ print $* }" ;
+# }
+
+# pygmentized less
+pretty() {
+	pygmentize -f terminal "$1" | less -R
 }
 
 rev() {
@@ -72,18 +54,16 @@ man() {
     man "$@"
 }
 
-time_to_minutes(){
-	local timestr="$1"
-	local h="$(echo ${timestr} | cut -c1-2)"
-	local m="$(echo ${timestr} | cut -c4-5)"
-	echo $(( h * 60 + m ))
+
+feedback() {
+	local msg="$@"
+	[[ $- == *i* ]] && echo "$msg" || notify-send "$msg"
 }
 
-minutes_to_time(){
-	local minutes="$1"
-	local h="$(( minutes / 60 ))"
-	local m="$(( minutes % 60 ))"
-#	echo "$h:$m";
-	printf "%02d:%02d\n" $h $m
+border(){
+	title="| $@ |"
+	edge=$(echo "$title" | sed 's/./-/g' | sed 's/^.\(.*\).$/+\1+/g')
+	echo "$edge"
+	echo "$title"
+	echo "$edge"
 }
-

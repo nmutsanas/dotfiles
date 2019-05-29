@@ -7,6 +7,7 @@ abbreviations=(
   "fhere" "find . -name \"*"
   "xmlsel" "xmlstarlet sel -t -v"
   "search" "grep  **/*(.) -e"
+  "ssearch" "grep ~/{scripts,dot}*/**/*(.) -e"
   "Im"    "| more"
   "Ia"    "| awk"
   "Ig"    "| grep -i"
@@ -22,6 +23,12 @@ abbreviations=(
   "Iw"    "| wc"
   "Ic"    "| wc -l"
   "Ix"    "| xargs"
+  "Ijson" "| jq '.' | pygmentize -l json"
+  "Ixml"  "| xmlstarlet fo | pygmentize -l xml"
+  "pomxml" "xml sel -N my=http://maven.apache.org/POM/4.0.0 -t -v /my:project/my:"
+  "scriptify" "fc -l -1 | cut -c 8- >"
+  "stripcomments" "| grep -v \"^$\" | grep -v \"^#.*$\""
+  "removecolors" "| sed -r \"s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g\""
 )
 
 magic-abbrev-expand() {

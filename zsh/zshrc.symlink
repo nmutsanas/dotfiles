@@ -16,39 +16,59 @@ then
   source ~/.localrc
 fi
 
+logzsh_init(){
+ if [[ -f /tmp/zshlog ]]; then
+	 rm /tmp/zshlog;
+ fi
+ date > /tmp/zshlog
+}
+
+logzsh(){
+	echo $(eval "$@") >> /tmp/zshlog
+}
+
+logzsh_init
 #load the topics
 
 # all of our zsh files
 typeset -U config_files # -U to ignore duplicates
 config_files=($HOME/dot/**/*.zsh)
-yellow "${#config_files} config files found"
-# load the path files
-local path_cnt=0;
-for file in ${(@M)config_files:#*/path.zsh} ; do
-	path_cnt=$((path_cnt + 1))
-	green $file &&	source $file
-done
-config_files=(${config_files:#*/path.zsh}) # remove them
+logzsh yellow "${#config_files} config files found"
+
 # load the env files
 local env_cnt=0;
 for file in ${(M)config_files:#*/env.zsh}; do
 	env_cnt=$((env_cnt + 1))
-	green $file && source $file
+	logzsh green $file
+	source $file
 done
 config_files=(${config_files:#*/env.zsh}) # remove them
+
+# load the path files
+local path_cnt=0;
+for file in ${(@M)config_files:#*/path.zsh} ; do
+	path_cnt=$((path_cnt + 1))
+	logzsh cyan $file
+	source $file
+done
+config_files=(${config_files:#*/path.zsh}) # remove them
 
 # load everything else (except completion)
 local other_cnt=0;
 for file in ${config_files:#*/completion.zsh}; do
 	other_cnt=$((other_cnt + 1))
-	green $file && source $file
+	logzsh green $file
+	source $file
 done
 config_files=(${(M)config_files:#*/completion.zsh})
+
 # load the completion files
 local compl_cnt=0;
 for file in ${(M)config_files:#*/completion.zsh}; do
 	compl_cnt=$((compl_cnt + 1));
-	green $file &&	source $file
+	logzsh blue $file
+	source $file
 done
 # print out a report of what was loaded, for debugging
-green "${path_cnt} path, ${env_cnt} env, ${other_cnt} other, ${compl_cnt} completion"
+logzsh green "${path_cnt} path, ${env_cnt} env, ${other_cnt} other, ${compl_cnt} completion"
+source /usr/share/doc/pkgfile/command-not-found.zsh

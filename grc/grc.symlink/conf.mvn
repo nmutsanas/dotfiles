@@ -1,0 +1,52 @@
+# a grc module for colourising the maven outputs
+
+regexp=^\[WARNING\]
+colours=bold yellow
+count=once
+-
+regexp=^\[ERROR\]
+colours=bold red
+count=once
+-
+# Passed
+regexp=.* SUCCESS \[.*
+colours=green
+count=stop
+-
+regexp=.* BUILD SUCCESS
+colours=green
+count=stop
+-
+# Failed
+regexp=(BUILD)? (failed|FAILURE|FAILED|FAIL)
+colours=bold red
+count=stop
+-
+regexp=Failures: [1-9][0-9]*
+colours=bold red
+count=once
+-
+regexp=Errors: [1-9][0-9]*
+colours=bold on_red
+count=once
+-
+regexp=Skipped: [1-9][0-9]*
+colours=bold yellow
+count=once
+-
+regexp=(Failures|Errors|Skipped): 0
+colours=bold green
+count=more
+-
+regexp=Tests run: [0-9]+,
+colours=italic
+count=once
+-
+regexp=Time elapsed: [0-9.]+ sec -
+colours=italic
+count=once
+-
+# this is probably a pathname
+regexp=~?([a-z_][a-z0-9_]{0,30})?/([^\0\n\ !$`&*()+]|\\\ )+\b/?
+colours=blue
+count=more

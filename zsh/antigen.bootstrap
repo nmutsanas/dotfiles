@@ -6,13 +6,12 @@ antigen use oh-my-zsh
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
 antigen bundles << EOBUNDLES
-  git
+  wd
   extract
   dircycle
   docker
   jsontools
   mvn
-  wd
   urltools
 EOBUNDLES
 
@@ -20,7 +19,7 @@ EOBUNDLES
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 # autoenv to source .env and .out files
-antigen bundle horosgrisa/autoenv
+antigen bundle zpm-zsh/autoenv
 
 # calculator
 antigen bundle arzzen/calc.plugin.zsh
@@ -37,7 +36,11 @@ antigen bundle srijanshetty/zsh-suffix-alias
 # higher order functions like map, filter
 antigen bundle Tarrasch/zsh-functional
 
-# Load the theme.
-antigen theme robbyrussell
+# easy motion for zsh
+antigen bundle hchbaw/zce.zsh
+
+# pure prompt
+antigen bundle mafredri/zsh-async
+antigen bundle sindresorhus/pure
 
 antigen apply

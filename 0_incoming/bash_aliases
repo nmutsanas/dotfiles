@@ -1,0 +1,107 @@
+BASH_PROFILE_DIR=~/dotfiles/bashrc/
+
+# meta
+alias editdist='xdg-open ~/scripts/dist-after-install.sh'
+
+# photos
+alias phototaken='exiftool -d "%Y-%m-%d" -DateTimeOriginal -S -s'
+
+alias echopath='echo -e ${PATH//:/\\n}'
+
+alias disks='echo "╓───── m o u n t . p o i n t s"; echo "╙────────────────────────────────────── ─ ─ "; lsblk -a; echo ""; echo "╓───── d i s k . u s a g e"; echo "╙────────────────────────────────────── ─ ─ "; df -h;'
+# better standard parameters
+alias df="df -Tha --total"
+alias duach="du -ach | sort -h"
+alias free="free -mt"
+alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
+
+# upgraded programs
+alias top="htop"
+alias du="ncdu"
+alias df="pydf"
+
+# web related
+alias myip="curl http://ipecho.net/plain; echo"
+alias mylocalip="ifconfig eth0 | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
+
+# find candidates for aliases
+alias usg="history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] \" \" CMD[a]/count*100 \"% \" a;}' | grep -v \"./\" | column -c3 -s \" \" -t | sort -nr | nl |  head -n10"
+
+# apt
+alias apt-install='sudo apt-get install'
+alias apt-search='apt-cache search' 
+alias apt-show='apt-cache show' 
+alias apt-purge='sudo apt-get --purge  remove' 
+alias apt-remove='sudo apt-get remove' 
+alias aptkey='sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys'
+
+# sys admin
+alias ports='netstat -tulanp'
+alias k9='kill -9'
+alias kk='sudo kill' # Expecting a pid
+
+alias incognito='set +o history;'
+alias cognito='set -o history'
+
+#search processes 
+alias p='ps aux |grep '
+
+# find commands that use internet (multi-language)
+alias netproc='lsof -P -i -n'
+
+# if user is not root, pass all commands via sudo #
+if [ $UID -ne 0 ]; then
+    alias reboot='sudo reboot'
+    alias update='sudo apt-get upgrade'
+fi
+
+alias now='date +"%d-%m-%Y %T"'
+alias nowtime='date +"%T"'
+alias nowdate='date +"%d-%m-%Y"'
+
+## pass options to free ## 
+alias meminfo='free -m -l -t'
+ 
+## get top process eating memory
+alias psmem='ps auxf | sort -nr -k 4'
+alias psmem10='ps auxf | sort -nr -k 4 | head -10'
+ 
+## get top process eating cpu ##
+alias pscpu='ps auxf | sort -nr -k 3'
+alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
+ 
+## Get server cpu info ##
+alias cpuinfo='lscpu'
+
+## older system use /proc/cpuinfo ##
+##alias cpuinfo='less /proc/cpuinfo' ##
+ 
+## get GPU ram on desktop / laptop## 
+alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
+
+alias cpProgress="rsync --progress -ravz"
+
+#Gives you what is using the most space. Both directories and files. Varies on
+#current directory
+alias most='du -hsx * | sort -rh | head -10'
+
+#find the files that has been added/modified most recently:
+alias lt='ls -alrt'
+
+alias machine="echo you are logged in to ... `uname -a | cut -f2 -d' '`"
+alias info='clear;machine;pwd'
+
+alias trace='mtr --report-wide --curses $1'
+alias killtcp='sudo ngrep -qK 1 $1 -d wlan0'
+alias usage='ifconfig wlan0 | grep 'bytes''
+alias connections='sudo lsof -n -P -i +c 15'
+
+alias .p="pushd ."
+alias p.="popd"
+
+alias size='du -h –max-depth=1'
+
+# three letters to tune into my favorite radio stations
+alias dlf="/usr/local/bin/mplayer -nocache -audiofile-cache 64 -prefer-ipv4 $(GET http://www.dradio.de/streaming/dlf.m3u|head -1)"
+
+alias testwebcam='vlc v4l2:///dev/video0'

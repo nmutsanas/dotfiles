@@ -1,0 +1,175 @@
+#
+# Philip Vanmontfort 2000-2013
+# philip >at> vanmontfort <antispam$ .be
+#
+# bashrc: based on default ubuntu/debian bash, internet, 
+# http://www.cyberciti.biz/tips/bash-aliases-mac-centos-linux-unix.html
+# http://souptonuts.sourceforge.net/chirico/index.php
+#
+
+
+
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+# don't put duplicate lines in the history. See bash(1) for more options
+# ... or force ignoredups and ignorespace
+HISTCONTROL=ignoredups:ignorespace
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+shopt -s checkwinsize
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+umask 077
+#------------------------------------------------------
+# kleuren
+norm='\[\033[m\]'
+bold='\[\033[1m\]'
+underline='\[\033[4m\]'
+bold='\[\033[5m\]'
+inverted='\[\033[7m\]'
+
+red='\[\033[0;31m\]'
+lred='\[\033[1;31m\]'
+green='\[\033[0;32m\]'
+lgreen='\[\033[1;32m\]'
+orange='\[\033[0;33m\]'
+yellow='\[\033[1;33m\]'
+blue='\[\033[0;34m\]'
+lblue='\[\033[1;34m\]'
+mangenta='\[\033[1;35m\]'
+white='\[\033[1;37m\]'
+
+#------------------------------------------------------
+PATH="~/bin:$PATH"
+LS_OPTS="--color=auto -h -p -F"
+
+export LS_OPTS PATH
+
+#------------------------------------------------------
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+    xterm*|rxvt*|screen*)    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'    ;;
+esac
+
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
+
+#------------------------------------------------------
+# alias-en
+alias ..='cd ..'
+alias ls='ls $LS_OPTS'
+alias ll='ls $LS_OPTS -la'
+alias l='ls $LS_OPTS -l'
+alias grep='grep --color=auto'
+alias bzip2='bzip2 --keep'
+alias less='less -R -S -#2'
+alias rmr='rm -r -I'
+alias cpr='cp -r'
+alias date='date -R'
+alias colorless='ccze -A|less'
+alias cl='colorless'
+alias last='last -a|ccze -A'
+alias syslog="tail -F /var/log/syslog|ccze -A"
+alias sl="syslog"
+alias ns="netstat --numeric-ports --numeric-hosts -atep|ccze -A"
+alias tf='tail -F'
+alias mcedit='mcedit -x'
+alias me='mcedit'
+alias diff='colordiff -y'
+alias wget='wget -c'
+alias rsync='rsync -ravz'
+alias rsyncssh='rsync -e ssh'
+alias lsmount='mount|sort|column -t|ccze -A'
+alias update='sudo aptitude update && sudo aptitude upgrade'
+alias nocomment='grep -Ev '\''^(#|$)'\'''
+alias hg='history|grep '
+alias tree='tree -C'
+alias userinfo='getent passwd|column  -t -s: -n'
+alias groupinfo='getent group|column  -t -s: -n'
+
+
+#TODO:
+# * bup commandos
+# * aliases voor daemon control
+
+if [ $UID -ne 0 ]; then
+  alias reboot='sudo reboot'
+  alias poweroff='sudo poweroff'
+fi
+
+# X
+alias aterm='aterm -tr -trsb -sh 45 -rv -cr yellow -pr red -sl 2000 -g 100x30'
+
+
+#------------------------------------------------------
+## F U N C T I O N S
+
+
+#bu() { cp $@ $@.backup-`date +%y%m%d`; }
+#bind ‘”…”:”pushd ..\n”‘ # AltGr .
+#bind ‘”÷”:”popd\n”‘ # AltGr Shift .
+
+colortail() { tail -F $*|ccze -A; }
+alias ct='colortail'
+
+cdl()       { cd "$@";  l; }
+maillog()   { colortail /var/log/mail*; }
+
+chmoddr()   {
+  # CHMOD _D_irectory _R_ecursivly
+
+  if [ -d "$1" ]; then 
+   echo "error: please use the mode first, then the directory";
+   return 1;
+  elif [ -d "$2" ]; then
+   find $2 -type d -print0 | xargs -0 chmod $1;
+  fi
+}
+
+assimilate(){
+  _assimilate_opts="";
+
+  if [ "$#" -lt 1 ]; then   echo "not enough arguments";    return 1;  fi
+  SSHSOCKET=~/.ssh/assimilate_socket.$1;
+  echo "resistence is futile! $1 will be assimilated";
+  if [ "$2" != "" ]; then
+    _assimilate_opts=" -p$2 ";
+  fi
+
+  ssh -M -f -N $_assimilate_opts -o ControlPath=$SSHSOCKET $1;  
+  if [ ! -S $SSHSOCKET ]; then echo "connection to $1 failed! (no socket)"; return 1; fi
+
+  ### begin assimilation
+  
+  # copy files
+  scp -o ControlPath=$SSHSOCKET ~/.bashrc $1:~;
+  scp -o ControlPath=$SSHSOCKET -r ~/.config/htop $1:~;
+  
+  # import ssh key
+  if [[ -z $(ssh-add -L|ssh -o ControlPath=$SSHSOCKET $1 "grep -f - ~/.ssh/authorized_keys") ]]; then
+    ssh -o ControlPath=$SSHSOCKET $1 "mkdir ~/.ssh > /dev/null 2>&1";
+    ssh-add -L > /dev/null&&ssh-add -L|ssh -o ControlPath=$SSHSOCKET $1 "cat >> ~/.ssh/authorized_keys"
+  fi
+  ssh -o ControlPath=$SSHSOCKET $1 "chmod -R 700 ~/.ssh";
+  
+  ### END
+  ssh -S $SSHSOCKET -O exit $1 2>1 >/dev/null;
+}
+
+
+#------------------------------------------------------
+# PS1
+if [ $(/usr/bin/whoami) = 'root' ]; then
+    PS1="${yellow}\u@\h${white}:${norm}\w${norm}${lred}#${norm} "
+else
+    PS1="${yellow}\u@\h${white}:${norm}\w${norm}\$ "
+fi
+#------------------------------------------------------

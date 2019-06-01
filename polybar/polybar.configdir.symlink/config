@@ -303,7 +303,7 @@ interval=600
 
 [module/upgrades]
 type = custom/script
-exec = ~/.config/polybar/myscripts/polybar-yaourt-upgrades.sh
+exec = yay -Qu | wc -l
 format-prefix
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}

@@ -1,0 +1,457 @@
+# i3 config file (v4)
+#
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+# Modifier
+set $mod Mod4
+
+# env vars
+set $scripts /home/nikos/scripts
+set $i3dot /home/nikos/dotfiles/i3
+
+focus_on_window_activation urgent
+focus_follows_mouse no
+
+# keyboard
+exec_always setxkbmap -option ctrl:nocaps # caps lock -> ctrl
+exec_always setxkbmap ch -variant basic
+exec_always xset r rate 200 40
+
+# debugging PATH
+exec_always echo "$PATH" > /tmp/path_on_startup
+
+# face
+exec ln -sf $(ls -1 /home/nikos/customization/faces/calvin*.png | sort --random-sort | head -n1) /home/nikos/.face.png
+exec compton
+
+#monitor
+exec $scripts/../.screenlayout/nvidia_low_res.sh
+bindsym XF86Forward exec  # disable it
+bindsym XF86Back    exec  # disable it
+
+# autostarts
+# disable this soon!
+exec --no-startup-id gnome-encfs-manager
+exec --no-startup-id devmon --no-gui
+exec --no-startup-id dropbox
+exec --no-startup-id random-wall.sh
+exec --no-startup-id termite -name terminal
+exec --no-startup-id xdotool key XF86TouchpadToggle
+exec --no-startup-id zsh -c "pulseaudio --kill && sleep 3 && pulseaudio --start"
+exec --no-startup-id redshiftgui
+
+# set colors of the day
+exec_always --no-startup-id /home/nikos/.config/polybar/launch.sh
+
+# font for window titles. ISO 10646 = Unicode
+#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+#font xft:Anonymous Pro 11
+#font xft:Quicksand 11
+#font xft:Dosis 12
+#font pango:Cousine, FontAwesome 12
+#font xft:Termsyn.Icons 12
+font pango:Terminus, 9
+
+# Tab up all your splits! https://www.reddit.com/r/i3wm/comments/69y9d3/tab_up_all_your_splits/
+workspace_layout tabbed
+
+# workspaces
+set $ws1 "1:α"
+set $ws2 "2:β"
+set $ws3 "3:γ"
+set $ws4 "4:δ"
+set $ws5 "5:ε"
+set $ws6 "6:ζ"
+set $ws7 "7:η"
+set $ws8 "8:θ"
+set $ws9 "9:ι"
+
+#make notifications behave
+for_window [class="Audacious"]                 floating enable
+for_window [class="Leafpad"]                   floating enable
+for_window [class="Pavucontrol"]               floating enable
+for_window [class="Baobab"]                    floating enable
+for_window [class="Xfce4-notifyd"]             floating enable, border none
+for_window [class="MPlayer"]                   floating enable
+for_window [class="Arandr"]                    floating enable
+for_window [class="^YADWIN$" instance="^yad$"] floating enable, border none
+for_window [instance="Download"]               floating enable
+for_window [class="Pnmixer"]                   floating enable
+for_window [window_role="plugin_ui"]           floating enable
+for_window [title="Menu Update"]               floating enable
+for_window [title="___"]                       floating enable
+for_window [class="Keepassx"]                  floating enable, mark "keepassx"
+for_window [class="feh"]                       floating enable
+for_window [class="Shutter"]                   floating enable
+for_window [title="^terminal$"]               floating enable, mark "terminal", border 1pixel, move scratchpad, show scratchpad, sticky enable
+for_window [class="Yad"]                       floating enable
+for_window [instance="sun-awt-X11-XDialogPeer"]   floating enable
+for_window [title="Android Virtual Device Manager"] floating enable
+for_window [class="Gcr-prompter"]              floating enable, sticky enable
+for_window [class="System-config-printer.py"]  floating enable
+for_window [con_mark="floating"]               floating enable, border 1pixel
+for_window [instance="^web\.whatsapp\.com$"] floating enable, border 1pixel, mark "whatsapp", move scratchpad, show scratchpad
+
+floating_modifier $mod
+
+# media keys
+bindsym XF86AudioRaiseVolume  exec pacvol.sh up
+bindsym XF86AudioLowerVolume  exec pacvol.sh down
+bindsym XF86AudioMute         exec pacvol.sh toggle
+bindsym XF86AudioMicMute      exec BLOCK_BUTTON=2 mic.sh
+bindsym XF86MonBrightnessUp   exec xbacklight -inc 5
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5
+bindsym XF86AudioPlay         exec playerctl -a play-pause
+bindsym XF86AudioNext         exec playerctl -a next
+bindsym XF86AudioPrev         exec playerctl -a previous
+bindsym XF86TouchpadToggle    exec $scripts/sys-toggle-touchpad.sh
+
+# # tablet keys
+# bindsym XF86TaskPane    exec $scripts/sys-wacomrotate.sh flip
+# bindsym XF86ScreenSaver exec $scripts/sys-wacomrotate.sh next
+
+# caps lock replacements (because it is an extra ctrl)
+bindsym $mod+Caps_Lock exec ~/dotfiles/work/turn_off_caps_lock_if_on.sh && setxkbmap -option ctrl:nocaps
+
+# meta-bindings
+bindsym $mod+F9            exec $scripts/i3-lookup-bindings.sh
+bindsym $mod+F10           exec $scripts/cheatsheets.sh activate
+bindsym $mod+F11           exec $scripts/cheatsheets.sh view
+bindsym $mod+F12           exec $scripts/cheatsheets.sh edit
+
+# work bindings
+bindsym $mod+Insert        exec trigger_hotfolder_i3.sh
+bindsym $mod+F8 --release  exec xdotool type '``````' && sleep 0.1 && xdotool key "Left" key "Left" key "Left"
+
+# modify own configs
+bindsym $mod+minus              exec termite -e "vim $i3dot/config.base"
+bindsym $mod+Shift+underscore   exec termite -e "vim /home/nikos/.config/polybar/config"
+
+# start a terminal
+bindsym $mod+Return    	   exec termite
+bindsym $mod+n             exec nemo
+
+# scratchpad
+bindsym $mod+Shift+question move scratchpad
+bindsym $mod+apostrophe       scratchpad show
+
+# find and focus
+bindsym $mod+F2       [con_mark="terminal"] scratchpad show
+bindsym $mod+Shift+F2 exec termite -t terminal
+bindsym $mod+Shift+F3 exec google-chrome-stable --app=https://web.whatsapp.com
+bindsym $mod+F3       [con_mark="whatsapp"] scratchpad show
+
+# interactive marks
+bindsym $mod+m exec i3-input -F 'mark %s' -P 'Mark name: '
+bindsym $mod+Shift+M exec i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
+
+# wallpaper
+bindsym $mod+Shift+W exec --no-startup-id random-wall.sh
+bindsym $mod+Mod1+Shift+W exec --no-startup-id rm-current-wall.sh
+
+# set keyboard layout
+bindsym $mod+period exec keyboard.sh toggle
+
+# kill focused window
+bindsym $mod+Shift+Q kill
+
+# cycle windows
+bindsym Mod1+Tab       focus right
+bindsym Mod1+Shift+Tab focus left
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec "dmenu_run -fn Dosis"
+
+# remove border
+bindsym $mod+u border toggle
+
+set $left  h
+set $down  j
+set $up    k
+set $right l
+
+# change focus
+bindsym $mod+$left  focus left
+bindsym $mod+$down  focus down
+bindsym $mod+$up    focus up
+bindsym $mod+$right focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up    focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+$left  move left
+bindsym $mod+Shift+$down  move down
+bindsym $mod+Shift+$up    move up
+bindsym $mod+Shift+$right move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up    move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+b split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+bindsym $mod+Ctrl+Shift+space sticky toggle
+
+# move to bottom and make short
+bindsym $mod+Control+space floating disable, border 1pixel, move down, move down, move down, resize shrink height 35 px or 35 ppt
+
+# make sticky and move to bottom right
+bindsym $mod+y fullscreen disable; floating enable; resize set 800 450; sticky enable; move window to position 1750 900
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+bindcode $mod+c focus child
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace and go there
+bindsym $mod+Shift+plus      move container to workspace $ws1,  workspace $ws1
+bindsym $mod+Shift+quotedbl          move container to workspace $ws2,  workspace $ws2
+bindsym $mod+Shift+asterisk  move container to workspace $ws3,  workspace $ws3
+bindsym $mod+Shift+ccedilla      move container to workspace $ws4,  workspace $ws4
+bindsym $mod+Shift+percent 	move container to workspace $ws5,  workspace $ws5
+bindsym $mod+Shift+ampersand    move container to workspace $ws6,  workspace $ws6
+bindsym $mod+Shift+slash   move container to workspace $ws7,  workspace $ws7
+bindsym $mod+Shift+parenleft    move container to workspace $ws8,  workspace $ws8
+bindsym $mod+Shift+parenright   move container to workspace $ws9,  workspace $ws9
+bindsym $mod+Shift+equal  move container to workspace $ws10, workspace $ws10
+
+# move workspace to next output. Will toggle with two outputs
+bindsym $mod+x move workspace to output right
+
+bindsym $mod+Shift+x exec clipboardxml=$RANDOM && xclip -o | xmlstarlet fo > /tmp/$clipboardxml.xml && $EDITOR /tmp/$clipboardxml.xml
+bindsym $mod+Shift+b exec urxvt -hold -e "xclip -o | json_pp | pygmentize -l json"
+
+# reload the configuration file
+bindsym $mod+Shift+C exec chmod a+w $i3dot/config && cat $i3dot/config.base $i3dot/weekly_colors/Mon > $i3dot/config && chmod a-w $i3dot/config && i3-msg reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+R exec chmod a+w $i3dot/config && cat $i3dot/config.base $i3dot/weekly_colors/Mon > $i3dot/config && chmod a-w $i3dot/config && i3-msg restart
+
+# lock
+bindsym $mod+p       exec pacvol.sh mute && $i3dot/lock/lock-multihead.sh
+bindsym $mod+Shift+P exec pacvol.sh mute && break.sh start && $i3dot/lock/lock-multihead.sh lunch.png && break.sh end && pkill -RTMIN+1 i3blocks;
+
+##################################
+#  __  __           _            #
+# |  \/  | ___   __| | ___  ___  #
+# | |\/| |/ _ \ / _` |/ _ \/ __| #
+# | |  | | (_) | (_| |  __/\__ \ #
+# |_|  |_|\___/ \__,_|\___||___/ #
+#                                #
+##################################
+
+# Resize window
+mode "resize" {
+    bindsym $left  resize shrink width  10 px or 10 ppt
+    bindsym $down  resize grow   height 10 px or 10 ppt
+    bindsym $up    resize shrink height 10 px or 10 ppt
+    bindsym $right resize grow   width  10 px or 10 ppt
+
+    bindsym Shift+$left  resize shrink width  5 px or 5 ppt
+    bindsym Shift+$down  resize grow   height 5 px or 5 ppt
+    bindsym Shift+$up    resize shrink height 5 px or 5 ppt
+    bindsym Shift+$right resize grow   width  5 px or 5 ppt
+
+    # same bindings, but for the arrow keys
+    bindsym Left  resize shrink width  10 px or 10 ppt
+    bindsym Down  resize grow   height 10 px or 10 ppt
+    bindsym Up    resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow   width  10 px or 10 ppt
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Launch programs
+# set $mode_launch [a]ndroid studio, [i]ntellij, [c]hrome, [n]emo, [e]volution, [w]ork layout
+# mode "$mode_launch" {
+#     bindsym a         exec /opt/android-studio/bin/studio.sh, mode "default"
+# 	bindsym i         exec /opt/intellij/idea/bin/idea.sh, mode "default"
+# 	bindsym c         exec google-chrome-stable, mode "default"
+# 	bindsym n         exec nemo --no-desktop, mode "default"
+# 	bindsym e         exec evolution, mode "default"
+# 	bindsym w         exec $i3dot/layouts/work/load_layout.sh, mode "default"
+#   bindsym Escape    mode "default"
+# 	bindsym Return    mode "default"
+# }
+# bindsym $mod+semicolon mode "$mode_launch"
+# Reminder launch is deprecated
+bindsym $mod+semicolon exec notify-send 'launch mode is deprecated. Use run menu instead'
+# Shutdown
+set $mode_system System [l]ock, [s]uspend, [S]hutdown, [h]ibernate, [r]eboot
+mode "$mode_system" {
+    bindsym l       exec i3exit lock, mode "default"
+    bindsym s       exec i3lock && systemctl suspend, mode "default"
+    bindsym Shift+s exec shutdown now, mode "default"
+    bindsym h       exec systemctl hibernate, mode "default"
+    bindsym r       exec systemctl reboot, mode "default"
+    # exit
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Pause mode "$mode_system"
+bindsym $mod+Escape mode "$mode_system"
+
+# Screen setup
+set $mode_screen [m]irror, [r]ight of notebook, [l]eft of notebook, [n]otebook only, [e]xternal only, [a]randr profile
+mode "$mode_screen" {
+    bindsym m exec "$scripts/system/xrandrh --output notebook --auto --output external --auto", mode "default"
+    bindsym r exec "$scripts/system/xrandrh --output notebook --auto --output external --auto --right-of notebook", mode "default"
+    bindsym l exec "$scripts/system/xrandrh --output notebook --auto --output external --auto --left-of notebook", mode "default"
+    bindsym n exec "$scripts/system/xrandrh --output notebook --auto --output external --off", mode "default"
+    bindsym e exec "$scripts/system/xrandrh --output notebook --off  --output external --auto", mode "default"
+	bindsym a exec "$scripts/system/pick-arandr.sh", mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+F7     mode "$mode_screen"
+bindsym XF86Display mode "$mode_screen"
+
+# brightness regulation
+bindsym $mod+KP_Add exec "light -A 5"
+bindsym $mod+KP_Subtract exec "light -U 5"
+
+# Screenshots and video screen grabs
+set $mode_capture [s]creenshot, [r]edo shot, [d]elay (4 sec), [v]ideograb, [a]gain same videograb, [n]amed videograb
+mode "$mode_capture" {
+	set $vidscript "~/scripts/vid-screen-capture.sh"
+	# still
+	bindsym s       exec "shutter -s -d 0", mode "default"
+	# double tap Print to do the most common thing
+	bindsym Print   exec "killall shutter; shutter -s -d 0", mode "default"
+	bindsym r       exec "shutter -r", mode "default"
+	bindsym d       exec "shutter -s -d 4", mode "default"
+	# video
+	bindsym v exec urxvt -e zsh -c "$vidscript", mode "default"
+	bindsym a exec urxvt -e zsh -c "$vidscript -r", mode "default"
+	bindsym n exec urxvt -e zsh -c "$vidscript -o $(yad --form --field='Video Filename' | tr -d '|')", mode "default"
+	# exit
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+bindsym Print mode "$mode_capture"
+
+ipc-socket /home/nikos/.i3/ipc.sock
+# vim:filetype=i3
+# config colors
+
+#  _   _____ 
+# (_) |___ / 
+# | |   |_ \ 
+# | |  ___) |
+# |_| |____/ 
+#
+
+# focused - active
+set $fa-border #00649a
+set $fa-bg #008bd5
+set $fa-text  #ffffff
+set $fa-indicator #1eaefc
+
+# focused - inactive
+set $fi-border #333333
+set $fi-bg #555555
+set $fi-text #ffffff
+set $fi-indicator #ffffff
+
+# unfocused
+set $uf-border #333333
+set $uf-bg #222222
+set $uf-text #888888
+set $uf-indicator #ffffff
+
+# urgent
+set $ur-border #f38400
+set $ur-bg #ff8b00
+set $ur-text #ffffff
+set $ur-indicator #ffffff
+
+#  _                
+# | |__   __ _ _ __ 
+# | '_ \ / _` | '__|
+# | |_) | (_| | |   
+# |_.__/ \__,_|_|  
+#
+
+# general
+set $bar-bg #222222
+set $bar-statusline #ffffff
+set $bar-separator #666666
+
+# focused workspace
+# (same as focused active window)
+
+# active workspace
+# (same as focused inactive window)
+
+# inactive workspace
+# (same as unfocused window)
+
+# urgent workspace
+# (same as urgent window)
+
+# class                 border       bg         text       indicator
+client.focused          $fa-border   $fa-bg     $fa-text   $fa-indicator
+client.focused_inactive $fi-border   $fi-bg     $fi-text   $fi-indicator
+client.unfocused 	$uf-border   $uf-bg     $uf-text   $uf-indicator
+client.urgent   	$ur-border   $ur-bg     $ur-text   $ur-indicator
+
+#bar {
+#    position top
+#    strip_workspace_numbers yes
+#    i3bar_command   /usr/bin/i3bar
+#    status_command  /usr/bin/i3blocks -c $i3dot/blocks/config
+#    colors {
+#        # general
+#	background $bar-bg
+#	statusline $bar-statusline
+#	separator  $bar-separator
+#
+#	# Type             border      background  text
+#	focused_workspace  $fa-border  $fa-bg  $fa-text
+#	active_workspace   $fi-border  $fi-bg  $fi-text
+#	inactive_workspace $uf-border  $uf-bg  $uf-text
+#	urgent_workspace   $ur-border  $ur-bg  $ur-text
+#    }
+#    font pango:Terminus, 8
+#}

@@ -1,0 +1,82 @@
+# config colors
+
+#  _   _____ 
+# (_) |___ / 
+# | |   |_ \ 
+# | |  ___) |
+# |_| |____/ 
+#
+
+# focused - active
+set $fa-border    #008fff
+set $fa-bg        #007fff
+set $fa-text      #ffffff
+set $fa-indicator #ffffff
+
+# focused - inactive
+set $fi-border    #333333
+set $fi-bg        #555555
+set $fi-text      #ffffff
+set $fi-indicator #ffffff
+
+# unfocused
+set $uf-border    #333333
+set $uf-bg        #222222
+set $uf-text      #888888
+set $uf-indicator #ffffff
+
+# urgent
+set $ur-border    #aa0000
+set $ur-bg        #990000
+set $ur-text      #ffffff
+set $ur-indicator #ffffff
+
+#  _                
+# | |__   __ _ _ __ 
+# | '_ \ / _` | '__|
+# | |_) | (_| | |   
+# |_.__/ \__,_|_|  
+#
+
+# general
+set $bar-bg	    #000000
+set $bar-statusline #ffffff
+set $bar-separator  #666666
+
+# focused workspace
+# (same as focused active window)
+
+# active workspace
+# (same as focused inactive window)
+
+# inactive workspace
+# (same as unfocused window)
+
+# urgent workspace
+# (same as urgent window)
+
+# class                 border       bg         text       indicator
+client.focused          $fa-border   $fa-bg     $fa-text   $fa-indicator
+client.focused_inactive $fi-border   $fi-bg     $fi-text   $fi-indicator
+client.unfocused 	$uf-border   $uf-bg     $uf-text   $uf-indicator
+client.urgent   	$ur-border   $ur-bg     $ur-text   $ur-indicator
+
+bar {
+    position top
+    strip_workspace_numbers yes
+    i3bar_command   /usr/bin/i3bar
+    status_command  /usr/bin/i3blocks -c $i3dot/blocks/config
+    colors {
+        # general
+	background $bar-bg
+	statusline $bar-statusline
+	separator  $bar-separator
+
+	# Type             border      background  text
+	focused_workspace  $fa-border  $fa-bg  $fa-text
+	active_workspace   $fi-border  $fi-bg  $fi-text
+	inactive_workspace $uf-border  $uf-bg  $uf-text
+	urgent_workspace   $ur-border  $ur-bg  $ur-text
+    }
+    font pango:Terminus, 8
+}

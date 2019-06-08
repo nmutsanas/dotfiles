@@ -1,0 +1,113 @@
+interval=5
+markup=pango
+#color=#8DA857
+#color=#5BACff
+color=#FFD64D
+
+# more pastel colors:
+#c56d83 #magenta
+#7b7eb7 #purple
+#82b1b1 #light blue
+#8da857 #green
+#dd9056 #orange
+#deb754 #yellow
+
+#[clickme]
+#full_text=Click me!
+#command=echo button=$BLOCK_BUTTON x=$BLOCK_X y=$BLOCK_Y
+#align=left
+
+[svn lib]
+command=svnlog.sh lib
+markup=pango
+interval=60
+
+[system upgrade]
+label=
+command=yaourt-upgrades.sh
+interval=18000
+signal=1
+
+[wire]
+label=
+command=detect-wire.sh
+interval=5
+
+[ram]
+label=<span></span>
+command=freemem.sh
+interval=30
+
+[cpu]
+label=
+command=cpu.sh
+interval=2
+markup=pango
+
+[network]
+command=myip.sh
+markup=pango
+interval=30
+
+[ie 11]
+label=
+command=ie11.sh
+interval=once
+
+[disk]
+label=
+command=hdfree.sh
+markup=pango
+interval=30
+
+[dropbox]
+label=
+command=dropbox-check-conflicts.zsh
+markup=pango
+interval=600
+
+[jenkins]
+command=dc-jenkins-status.sh
+markup=pango
+interval=5
+signal=1
+
+[volume]
+command=pacvol.sh $BLOCK_BUTTON display
+signal=1
+interval=once
+min_width="100%"
+
+[mic]
+command=mic.sh
+color=#FFFFFF
+interval=5
+
+[keyboard]
+# label=
+command=keyboard.sh display
+interval=once
+signal=1
+
+[battery]
+command=battery.sh
+interval=60
+
+[calendar]
+label=
+command=i3-date-time.sh date
+interval=60
+
+[start]
+label=
+command=lastboot.sh
+interval=once
+signal=1
+
+[time]
+label=
+command=i3-date-time.sh time
+markup=pango
+interval=10
+
+# vim:filetype=dosini

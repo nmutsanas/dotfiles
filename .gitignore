@@ -15,6 +15,3 @@ cheatsheets/.active
 
 .idea
 /zsh/antigen.bootstrap.zwc
-git/gitconfig.local.symlink
-ranger/ranger.configdir.symlink/bookmarks
-cheatsheets/.active

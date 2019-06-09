@@ -7,7 +7,7 @@ set $mod Mod4
 
 # env vars
 set $scripts /home/nikos/scripts
-set $i3dot /home/nikos/.i3
+set $i3dot /home/nikos/.config/i3/
 
 focus_on_window_activation urgent
 focus_follows_mouse no

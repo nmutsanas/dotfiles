@@ -7,7 +7,7 @@ set $mod Mod4
 
 # env vars
 set $scripts /home/nikos/scripts
-set $i3dot /home/nikos/dot/i3
+set $i3dot /home/nikos/.config/i3/
 
 focus_on_window_activation urgent
 focus_follows_mouse no
@@ -371,7 +371,7 @@ mode "$mode_capture" {
 }
 bindsym Print mode "$mode_capture"
 
-ipc-socket /home/nikos/.i3/ipc.sock
+ipc-socket /tmp/i3ipc.sock
 # vim:filetype=i3
 # config colors
 

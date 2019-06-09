@@ -7,7 +7,7 @@ set $mod Mod4
 
 # env vars
 set $scripts /home/nikos/scripts
-set $i3dot /home/nikos/dotfiles/i3
+set $i3dot /home/nikos/dot/i3
 
 focus_on_window_activation urgent
 focus_follows_mouse no
@@ -111,7 +111,7 @@ bindsym XF86TouchpadToggle    exec $scripts/sys-toggle-touchpad.sh
 # bindsym XF86ScreenSaver exec $scripts/sys-wacomrotate.sh next
 
 # caps lock replacements (because it is an extra ctrl)
-bindsym $mod+Caps_Lock exec ~/dotfiles/work/turn_off_caps_lock_if_on.sh && setxkbmap -option ctrl:nocaps
+bindsym $mod+Caps_Lock exec ~/dot/work/turn_off_caps_lock_if_on.sh && setxkbmap -option ctrl:nocaps
 
 # meta-bindings
 bindsym $mod+F9            exec $scripts/i3-lookup-bindings.sh

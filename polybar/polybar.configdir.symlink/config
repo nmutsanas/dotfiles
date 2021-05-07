@@ -13,7 +13,7 @@ background = #222
 background-alt = #444
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
-foreground-alt = #555
+foreground-alt = #ccc
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
@@ -42,14 +42,21 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = fixed:pixelsize=10;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = "Wuncon Siji:pixelsize=10;1"
-font-3 = "FontAwesome:style=Regular:size=8;1"
+;font-0 = fixed:pixelsize=10;1
+;font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+;font-2 = "Wuncon Siji:pixelsize=10;1"
+;font-3 = Font Awesome 5 Free-Regular:style=Regular:size=10;4
+font-4 = DejavuSansMono:size=10;4
+font-3 = NotoSansCJKJP:size=10;4
+;font-2 = FontAwesome:size=10;4
+font-0 = Font Awesome 5 Free Solid:style=Solid:size=10;4
+font-1 = Font Awesome 5 Free Solid:size=10;4
+font-2 = Font Awesome 5 Brands Regular:size=10;4
+
 
 modules-left = i3
 modules-center = xwindow
-modules-right =  upgrades whatsapp borg filesystem xbacklight volume mic xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-right =  upgrades whatsapp borg filesystem volume mic xkeyboard memory cpu xbacklight wlan eth battery temperature date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -74,7 +81,7 @@ enable-ipc = true
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:70:...%
+label = %title:0:40:...%
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -96,7 +103,7 @@ mount-0 = /
 mount-1 = /mnt/data
 
 label-mounted = %{F#0a81f5}%mountpoint% %total%%{F-}: %free% (%percentage_used%%)
-label-unmounted = %mountpoint% not mounted
+label-unmounted = %mountpoint%(?)
 label-unmounted-foreground = ${colors.foreground-alt}
 
 [module/bspwm]
@@ -167,6 +174,7 @@ label-song-ellipsis = true
 
 [module/xbacklight]
 type = internal/xbacklight
+output = eDP-1
 
 format = <label> <bar>
 label = BL
@@ -297,34 +305,29 @@ exec = yay -Qu | wc -l
 click-left = termite -e 'zsh -c "yaourt -Suya && pkill -SIGUSR1 $(cat /tmp/polybar-yaourt-upgrades.pid)"' &
 click-right = BLOCK_BUTTON=3 yaourt-upgrades.sh
 tail=true
-#interval = 1800
+interval = 1800
 
 [module/battery]
 type = internal/battery
 battery = BAT0
-adapter = ADP1
+adapter = ACAD
 full-at = 98
 
-format-charging = <animation-charging> <label-charging>
+format-charging = + <ramp-capacity> <label-charging>
 format-charging-underline = #ffb52a
 
-format-discharging = <ramp-capacity> <label-discharging>
+format-discharging = - <ramp-capacity> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 
-format-full-prefix = " "
+format-full-prefix = ""
 format-full-prefix-foreground = ${colors.foreground-alt}
 format-full-underline = ${self.format-charging-underline}
 
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
 ramp-capacity-foreground = ${colors.foreground-alt}
-
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-foreground = ${colors.foreground-alt}
-animation-charging-framerate = 750
 
 [module/temperature]
 type = internal/temperature
@@ -340,9 +343,11 @@ label = %temperature:5%
 label-warn = %temperature%
 label-warn-foreground = ${colors.secondary}
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
 ramp-foreground = ${colors.foreground-alt}
 
 [module/powermenu]

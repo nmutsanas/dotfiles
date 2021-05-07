@@ -94,8 +94,7 @@ for_window [title="Android Virtual Device Manager"] floating enable
 for_window [class="Gcr-prompter"]              floating enable, sticky enable
 for_window [class="System-config-printer.py"]  floating enable
 for_window [con_mark="floating"]               floating enable, border 1pixel
-for_window [instance="^web\.whatsapp\.com$"] floating enable, border 1pixel, mark "whatsapp", move scratchpad, show scratchpad
-
+for_window [instance="^web\.whatsapp\.com$"]   border 1pixel, mark "whatsapp"
 floating_modifier $mod
 
 # media keys
@@ -103,8 +102,8 @@ bindsym XF86AudioRaiseVolume  exec pacvol.sh up
 bindsym XF86AudioLowerVolume  exec pacvol.sh down
 bindsym XF86AudioMute         exec pacvol.sh toggle
 bindsym XF86AudioMicMute      exec BLOCK_BUTTON=2 mic.sh
-bindsym XF86MonBrightnessUp   exec xbacklight -inc 5
-bindsym XF86MonBrightnessDown exec xbacklight -dec 5
+bindsym XF86MonBrightnessUp   exec "light -A 2; notify-send 'brightness '$(light)"
+bindsym XF86MonBrightnessDown exec "light -U 2; notify-send 'brightness '$(light)"
 bindsym XF86AudioPlay         exec playerctl -a play-pause
 bindsym XF86AudioNext         exec playerctl -a next
 bindsym XF86AudioPrev         exec playerctl -a previous

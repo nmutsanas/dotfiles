@@ -12,6 +12,8 @@ from ranger.api.commands import *
 
 # You can import any python module as needed.
 import os
+import ranger.api
+import ranger.core.linemode
 
 # Any class that is a subclass of "Command" will be integrated into ranger as a
 # command.  Try typing ":my_edit<ENTER>" in ranger!
@@ -37,7 +39,7 @@ class my_edit(Command):
             # reference to the currently selected file.
             target_filename = self.fm.thisfile.path
 
-        # This is a generic function to print text in ranger.  
+        # This is a generic function to print text in ranger.
         self.fm.notify("Let's edit the file " + target_filename + "!")
 
         # Using bad=True in fm.notify allows you to print error messages:
@@ -57,3 +59,15 @@ class my_edit(Command):
         # This is a generic tab-completion function that iterates through the
         # content of the current directory.
         return self._tab_directory_content()
+
+@ranger.api.register_linemode     # It may be used as a decorator too!
+class Mp3Linemode(ranger.core.linemode.LinemodeBase):
+    name = "mp3_linemode"
+
+    def filetitle(self, file, metadata):
+        return file.relative_path
+
+    def infostring(self, file, metadata):
+        stream = os.popen('/usr/bin/mp3info -p "(%n) %a - [%l] %t" "' + file.relative_path + '"')
+        output = stream.read()
+        return output

@@ -22,7 +22,9 @@ exec_always echo "$PATH" > /tmp/path_on_startup
 
 # face
 exec ln -sf $(ls -1 /home/nikos/customization/faces/calvin*.png | sort --random-sort | head -n1) /home/nikos/.face.png
-exec compton
+
+# mouse
+exec_always imwheel
 
 #monitor
 exec $scripts/../.screenlayout/nvidia_low_res.sh
@@ -34,7 +36,8 @@ bindsym XF86Back    exec  # disable it
 exec --no-startup-id gnome-encfs-manager
 exec --no-startup-id devmon --no-gui
 exec --no-startup-id dropbox
-exec --no-startup-id random-wall.sh
+exec --no-startup-id pick-arandr.sh "restore"
+exec --no-startup-id restore-screen-settings.sh
 exec --no-startup-id termite -name terminal
 exec --no-startup-id xdotool key XF86TouchpadToggle
 exec --no-startup-id zsh -c "pulseaudio --kill && sleep 3 && pulseaudio --start"
@@ -68,6 +71,7 @@ set $ws9 "9:ι"
 
 #make notifications behave
 for_window [class="Audacious"]                 floating enable
+for_window [title="Elm Debugger"]              floating enable
 for_window [class="Leafpad"]                   floating enable
 for_window [class="Pavucontrol"]               floating enable
 for_window [class="Baobab"]                    floating enable
@@ -111,17 +115,12 @@ bindsym XF86TouchpadToggle    exec $scripts/sys-toggle-touchpad.sh
 # bindsym XF86ScreenSaver exec $scripts/sys-wacomrotate.sh next
 
 # caps lock replacements (because it is an extra ctrl)
-bindsym $mod+Caps_Lock exec ~/dot/work/turn_off_caps_lock_if_on.sh && setxkbmap -option ctrl:nocaps
 
 # meta-bindings
 bindsym $mod+F9            exec $scripts/i3-lookup-bindings.sh
 bindsym $mod+F10           exec $scripts/cheatsheets.sh activate
 bindsym $mod+F11           exec $scripts/cheatsheets.sh view
 bindsym $mod+F12           exec $scripts/cheatsheets.sh edit
-
-# work bindings
-bindsym $mod+Insert        exec trigger_hotfolder_i3.sh
-bindsym $mod+F8 --release  exec xdotool type '``````' && sleep 0.1 && xdotool key "Left" key "Left" key "Left"
 
 # modify own configs
 bindsym $mod+minus              exec termite -e "vim $i3dot/config.base"
@@ -300,21 +299,6 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# Launch programs
-# set $mode_launch [a]ndroid studio, [i]ntellij, [c]hrome, [n]emo, [e]volution, [w]ork layout
-# mode "$mode_launch" {
-#     bindsym a         exec /opt/android-studio/bin/studio.sh, mode "default"
-# 	bindsym i         exec /opt/intellij/idea/bin/idea.sh, mode "default"
-# 	bindsym c         exec google-chrome-stable, mode "default"
-# 	bindsym n         exec nemo --no-desktop, mode "default"
-# 	bindsym e         exec evolution, mode "default"
-# 	bindsym w         exec $i3dot/layouts/work/load_layout.sh, mode "default"
-#   bindsym Escape    mode "default"
-# 	bindsym Return    mode "default"
-# }
-# bindsym $mod+semicolon mode "$mode_launch"
-# Reminder launch is deprecated
-bindsym $mod+semicolon exec notify-send 'launch mode is deprecated. Use run menu instead'
 # Shutdown
 set $mode_system System [l]ock, [s]uspend, [S]hutdown, [h]ibernate, [r]eboot
 mode "$mode_system" {
@@ -371,7 +355,7 @@ mode "$mode_capture" {
 }
 bindsym Print mode "$mode_capture"
 
-ipc-socket /tmp/i3ipc.sock
+ipc-socket /home/nikos/.i3/ipc.sock
 # vim:filetype=i3
 # config colors
 

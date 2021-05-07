@@ -29,6 +29,7 @@ abbreviations=(
   "scriptify" "fc -l -1 | cut -c 8- >"
   "stripcomments" "| grep -v \"^$\" | grep -v \"^#.*$\""
   "removecolors" "| sed -r \"s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g\""
+  "backslash" "\\"
 )
 
 magic-abbrev-expand() {

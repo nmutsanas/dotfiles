@@ -77,4 +77,5 @@ for file in ${(M)config_files:#*/completion.zsh}; do
 done
 # print out a report of what was loaded, for debugging
 logzsh green "${path_cnt} path, ${env_cnt} env, ${other_cnt} other, ${compl_cnt} completion"
-source /usr/share/doc/pkgfile/command-not-found.zsh
+#source /usr/share/doc/pkgfile/command-not-found.zsh
+source /usr/share/doc/find-the-command/ftc.zsh

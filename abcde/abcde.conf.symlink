@@ -23,7 +23,7 @@ CDPARANOIAOPTS="--never-skip=40"
 # Give the location of the CD identification program:
 CDDISCID=cd-discid
 
-CDDBMETHOD=cddb
+CDDBMETHOD=cddb,cdtext
 CDDBURL="http://gnudb.gnudb.org/~cddb/cddb.cgi"
 #CDDBURL="http://freedb.freedb.org/~cddb/cddb.cgi"
 CDDBSUBMIT=freedb-submit@freedb.org

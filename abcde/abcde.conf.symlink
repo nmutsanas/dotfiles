@@ -23,6 +23,11 @@ CDPARANOIAOPTS="--never-skip=40"
 # Give the location of the CD identification program:
 CDDISCID=cd-discid
 
+CDDBMETHOD=cddb
+CDDBURL="http://gnudb.gnudb.org/~cddb/cddb.cgi"
+#CDDBURL="http://freedb.freedb.org/~cddb/cddb.cgi"
+CDDBSUBMIT=freedb-submit@freedb.org
+
 OUTPUTDIR="$HOME/music/0_incoming/"
 ACTIONS=cddb,playlist,read,encode,tag,move,clean
 OUTPUTFORMAT='${ARTISTFILE}-${ALBUMFILE}/${TRACKNUM}.${TRACKFILE}'

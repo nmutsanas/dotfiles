@@ -43,6 +43,8 @@ alias editfunctions="$EDITOR ${ZSH_HOME}/functions.zsh"
 alias editenv="$EDITOR ${ZSH_HOME}/env.zsh"
 alias editabbrev="$EDITOR ${ZSH_HOME}/abbreviations.zsh"
 alias editprofile="$EDITOR ~/.zshrc"
+# alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+alias ytdl='youtube-dl -f bestaudio\[ext=m4a\] --embed-thumbnail --add-metadata'
 
 # data formatting
 alias -g pxml="| xmlstarlet fo | pygmentize -l xml"
@@ -52,3 +54,4 @@ alias -g pjson="| json_pp | pygmentize -l json"
 alias xjson="xclip -o | json_pp | pygmentize -l json"
 alias xxml="xclip -o | xmlstarlet fo - | pygmentize -l xml"
 alias playsg="echo /tmp/*.(mkv|mp4)(.om[1]) | xclip -i && mplayer /tmp/*.(mp4|mkv)(.om[1])"
+alias chrome-leon="google-chrome-stable --user-data-dir=$HOME/.config/google-chrome/leon"

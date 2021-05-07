@@ -1,4 +1,10 @@
 #!/bin/zsh
+cdl() {
+	cd "$@"
+	if [[ "$?" == 0 ]]; then
+		ls -al
+	fi
+}
 bak(){
 	cp "$1" "$1.bak"
 }

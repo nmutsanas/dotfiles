@@ -2,6 +2,8 @@
 # bindkey "C-n" "ranger"
 bindkey "^Xz" zce
 
+#bindkey "^Xl" kill-whole-line
+
 # Vim style key bindings
 # bindkey -v
 

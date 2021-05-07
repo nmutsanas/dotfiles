@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # better defaults
-alias qiv='qiv -tf'
+alias qiv='qiv -tfB'
 alias ll='ls -lah'
 alias du='du -h'
 alias nemo='nemo --no-desktop'
@@ -13,7 +13,6 @@ alias rm=' rm'
 alias ls=' ls --color=auto'
 
 # add some color
-alias mvn='grc mvn'
 
 # xclip with clipboard, not selection
 alias xclipc='xclip -selection clipboard'

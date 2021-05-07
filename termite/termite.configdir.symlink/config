@@ -17,3 +17,5 @@ color12=	#6d9cbe
 color13=	#b6b3eb
 color14=	#519f50
 color15=	#f9f7f3
+
+scrollback_lines=-1

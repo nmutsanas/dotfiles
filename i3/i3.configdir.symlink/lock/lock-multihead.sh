@@ -3,8 +3,8 @@
 # parameters
 
 # masks dir : contains masks composed of 10x10 white circles on black background
-masks_dir=~/dotfiles/i3/lock/masks
-icons_dir=~/dotfiles/i3/lock/icons
+masks_dir=~/.config/i3/lock/masks
+icons_dir=~/.config/i3/lock/icons
 
 # files
 screenshot=/tmp/screenaaa.png
@@ -44,7 +44,7 @@ if [[ -f "$icon" ]]; then
     RX=$(echo $R | cut -d' ' -f 1)
     RY=$(echo $R | cut -d' ' -f 3)
 
-	SR=$(xrandr | awk '/\ connected/ && /[[:digit:]]x[[:digit:]].*+/{print $3}')
+	SR=$(xrandr | awk '/connected primary/ && /[[:digit:]]x[[:digit:]].*+/{print $4}')
     for RES in $SR
     do
         # monitor position/offset

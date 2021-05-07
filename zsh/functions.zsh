@@ -18,7 +18,7 @@ getmyip(){
 	echo "${myip}"
 }
 
-c() { cd ~/code/dt5/$1; }
+c() { cd ~/code/$1; }
 
 h() { cd ~/$1; }
 

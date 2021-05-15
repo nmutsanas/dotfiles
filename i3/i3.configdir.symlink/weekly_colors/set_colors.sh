@@ -1,6 +1,6 @@
 #!/bin/zsh
 set_colors(){
-	readonly i3root="~/dotfiles/i3/"
+	readonly i3root="~/.config/i3/"
 	typeset -A nrToDay
 	readonly nrToDay=(1 Mon 2 Tue 3 Wed 4 Thu 5 Fri 6 Sat 7 Sun);
 	local today=$(date +"%a");

@@ -44,7 +44,7 @@ exec --no-startup-id zsh -c "pulseaudio --kill && sleep 3 && pulseaudio --start"
 exec --no-startup-id redshiftgui
 
 # set colors of the day
-exec_always --no-startup-id /home/nikos/.config/polybar/launch.sh
+exec_always --no-startup-id /home/nikos/.config/polybar/launch_polybar.sh
 
 # font for window titles. ISO 10646 = Unicode
 #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -112,9 +112,6 @@ bindsym XF86TouchpadToggle    exec $scripts/sys-toggle-touchpad.sh
 # # tablet keys
 # bindsym XF86TaskPane    exec $scripts/sys-wacomrotate.sh flip
 # bindsym XF86ScreenSaver exec $scripts/sys-wacomrotate.sh next
-
-# caps lock replacements (because it is an extra ctrl)
-bindsym $mod+Caps_Lock exec ~/dotfiles/work/turn_off_caps_lock_if_on.sh && setxkbmap -option ctrl:nocaps
 
 # meta-bindings
 bindsym $mod+F9            exec $scripts/i3-lookup-bindings.sh

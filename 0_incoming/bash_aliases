@@ -1,4 +1,4 @@
-BASH_PROFILE_DIR=~/dotfiles/bashrc/
+BASH_PROFILE_DIR=~/dot/bashrc/
 
 # meta
 alias editdist='xdg-open ~/scripts/dist-after-install.sh'

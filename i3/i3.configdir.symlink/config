@@ -27,7 +27,7 @@ exec ln -sf $(ls -1 /home/nikos/customization/faces/calvin*.png | sort --random-
 exec_always imwheel
 
 #monitor
-exec $scripts/../.screenlayout/nvidia_low_res.sh
+#exec $scripts/../.screenlayout/nvidia_low_res.sh
 bindsym XF86Forward exec  # disable it
 bindsym XF86Back    exec  # disable it
 
@@ -37,7 +37,7 @@ exec --no-startup-id gnome-encfs-manager
 exec --no-startup-id devmon --no-gui
 exec --no-startup-id dropbox
 exec --no-startup-id pick-arandr.sh "restore"
-exec --no-startup-id restore-screen-settings.sh
+#exec --no-startup-id restore-screen-settings.sh
 exec --no-startup-id termite -name terminal
 exec --no-startup-id xdotool key XF86TouchpadToggle
 exec --no-startup-id zsh -c "pulseaudio --kill && sleep 3 && pulseaudio --start"

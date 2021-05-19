@@ -9,7 +9,7 @@
 source ~/.config/polybar/bin/colors.sh
 
 manabar_print() {
-	ESSID=$(iwconfig wlan0 | grep ESSID | cut -d: -f2 | xargs)
+	ESSID=$(iwconfig wlp3s0 | grep ESSID | cut -d: -f2 | xargs)
 	[ "$ESSID" = "off/any" ] && CONNECTED_WIFI=0 || CONNECTED_WIFI=1
 	WIFI_Q=$(awk 'NR==3 {printf("%.0f\n",$3*10/7)}' /proc/net/wireless)
 	if [ "$CONNECTED_WIFI" -eq 1 ]; then

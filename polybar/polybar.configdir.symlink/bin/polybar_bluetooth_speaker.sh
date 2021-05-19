@@ -13,9 +13,9 @@ source ~/.config/polybar/bin/colors.sh
 bluetooth_speaker() {
 	SPEAKER_CONNECTED=$(bt-device -i 2C:41:A1:81:68:62 | grep Connected | xargs | cut -d ' ' -f 2)
 	if [ "$SPEAKER_CONNECTED" -eq 1 ]; then
-		speaker_indicator="${faded_green}${RESET}"
+		speaker_indicator="${faded_green}${RESET}"
 	else
-		speaker_indicator="${dark0_soft}${RESET}"
+		speaker_indicator="${dark0_soft}${RESET}"
 	fi
 	echo $speaker_indicator
 }

@@ -1,0 +1,4 @@
+# Updates polybar sound icon whenever some bluetooth device is connected or disconnected.
+# To be placed in /etc/udev/rules.d/
+ACTION=="add", SUBSYSTEM=="bluetooth", RUN+="/bin/sh -c '/home/nikos/.config/polybar/udevrules/on-connect-bluetooth.sh'"
+ACTION=="remove", SUBSYSTEM=="bluetooth", RUN+="/bin/sh -c '/home/nikos/.config/polybar/udevrules/on-connect-bluetooth.sh'"
